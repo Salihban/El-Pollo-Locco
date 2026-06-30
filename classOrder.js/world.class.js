@@ -2,32 +2,25 @@ import { Character } from "./Character.class.js";
 import { Chicken } from "./chicken.class.js";
 import { Cloud } from "./Cloud.class.js";
 import { BackgroundObject } from "./background-Object.class.js";
+import { level1 } from "../levels/level1.js";
 
 
 export class World {
     character = new Character();
-    enemies = [
-    new Chicken(),
-    new Chicken(),
-    new Chicken()
-    ];
-    clouds = [
-        new Cloud()
-    ];
-    BackgroundObjects = [
-        new BackgroundObject('img/5_background/layers/air.png', 0),
-        new BackgroundObject('img/5_background/layers/3_third_layer/1.png', 0),
-        new BackgroundObject('img/5_background/layers/2_second_layer/1.png', 0),
-        new BackgroundObject('img/5_background/layers/1_first_layer/1.png', 0)
-    ];
+    enemies = level1.enemies;
+    clouds = level1.clouds;
+    BackgroundObjects = level1.BackgroundObjects;
     canvas;
     ctx;
     keyboard;
+    camera_x = 0;
 
-    constructor(canvas, keyboard) {
+    constructor(canvas, keyboard, level) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
+        this.level = level;
+
         this.draw();
         this.setWorld();
     }
@@ -38,11 +31,14 @@ export class World {
 
     draw() {
         this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+        this.ctx.translate(this.camera_x, 0);
 
         this.addObjectsToMap(this.BackgroundObjects);
         this.addToMap(this.character);
         this.addObjectsToMap(this.clouds);
         this.addObjectsToMap(this.enemies);
+
+        this.ctx.translate(-this.camera_x, 0);
 
         // draw() is called repeatedly
         let self = this;

@@ -3,6 +3,7 @@ import { Chicken } from "./classOrder.js/chicken.class.js";
 import { MovableObject } from "./classOrder.js/movable-object.class.js";
 import { World } from "./classOrder.js/world.class.js";
 import { Keyboard } from "./classOrder.js/keyboard.class.js";
+import { level1 } from "./levels/level1.js";
 
 let canvas;
 let world;
@@ -10,7 +11,7 @@ let keyboard = new Keyboard();
 
 function init() {
     canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard);
+    world = new World(canvas, keyboard, level1);
 }
 init();
 
