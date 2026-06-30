@@ -1,5 +1,6 @@
 import { Character } from "./Character.class.js";
 import { Chicken } from "./chicken.class.js";
+import { Cloud } from "./Cloud.class.js";
 
 
 export class World {
@@ -8,6 +9,9 @@ export class World {
     new Chicken(),
     new Chicken(),
     new Chicken()
+    ];
+    clouds = [
+        new Cloud()
     ];
 
     canvas;
@@ -25,6 +29,10 @@ export class World {
         this.ctx.drawImage(this.character.img, this.character.x, this.character.y, this.character.width, this.character.height);
         this.enemies.forEach(enemy => {
             this.ctx.drawImage(enemy.img, enemy.x, enemy.y, enemy.width, enemy.height);
+        });
+
+        this.clouds.forEach(cloud => {
+            this.ctx.drawImage(cloud.img, cloud.x, cloud.y, cloud.width, cloud.height);
         });
 
         // draw() is called repeatedly
