@@ -22,12 +22,16 @@ export class MovableObject {
         });
     }
 
-    moveRight() {
-        
-    }
     moveLeft(){
         setInterval(() => {
         this.x -= this.speed;
         }, 1000 / 60);
+    }
+
+    playAnimation(images) {
+        let i = this.currentImages % images.length;
+        let path = images[i];
+        this.img = this.imageCache[path];
+        this.currentImages++;
     }
 }

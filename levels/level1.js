@@ -2,12 +2,14 @@ import { Level } from "../classOrder.js/level.class.js";
 import { Chicken } from "../classOrder.js/chicken.class.js";
 import { Cloud } from "../classOrder.js/Cloud.class.js";
 import { BackgroundObject } from "../classOrder.js/background-Object.class.js";
+import { Endboss } from "../classOrder.js/endboss.class.js";
 
 export const level1 = new Level(
 [
     new Chicken(),
     new Chicken(),
     new Chicken(),
+    new Endboss()
 ],
 [
     new Cloud()
