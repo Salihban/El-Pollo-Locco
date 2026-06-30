@@ -7,9 +7,7 @@ import { level1 } from "../levels/level1.js";
 
 export class World {
     character = new Character();
-    enemies = level1.enemies;
-    clouds = level1.clouds;
-    BackgroundObjects = level1.BackgroundObjects;
+    level = level1;
     canvas;
     ctx;
     keyboard;
@@ -33,10 +31,10 @@ export class World {
         this.ctx.clearRect(0, 0, canvas.width, canvas.height);
         this.ctx.translate(this.camera_x, 0);
 
-        this.addObjectsToMap(this.BackgroundObjects);
+        this.addObjectsToMap(this.level.BackgroundObjects);
+        this.addObjectsToMap(this.level.clouds);
+        this.addObjectsToMap(this.level.enemies);
         this.addToMap(this.character);
-        this.addObjectsToMap(this.clouds);
-        this.addObjectsToMap(this.enemies);
 
         this.ctx.translate(-this.camera_x, 0);
 
