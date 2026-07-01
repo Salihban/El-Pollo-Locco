@@ -3,6 +3,8 @@ import { MovableObject } from "./movable-object.class.js";
 export class Chicken extends MovableObject{
     y = 370;
     height = 70;
+    showFrame = true;
+    
     IMAGES_WALKING = [
         'img/3_enemies_chicken/chicken_normal/1_walk/1_w.png',
         'img/3_enemies_chicken/chicken_normal/1_walk/2_w.png',

@@ -4,6 +4,7 @@ export class Character extends MovableObject {
     height = 280;
     y = 60;
     speed = 10;
+    showFrame = true;
 
     IMAGES_WALKING = [
         'img/2_character_pepe/2_walk/W-21.png',

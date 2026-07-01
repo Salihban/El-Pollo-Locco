@@ -5,6 +5,7 @@ export class Endboss extends MovableObject {
     height = 400;
     width = 250;
     y = 60;
+    showFrame = true;
 
     IMAGES_WALKING = [
         'img/4_enemie_boss_chicken/2_alert/G5.png',
