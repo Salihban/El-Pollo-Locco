@@ -18,13 +18,23 @@ export class World {
         this.canvas = canvas;
         this.keyboard = keyboard;
         this.level = level;
-
         this.draw();
         this.setWorld();
+        this.checkCollision();
     }
 
     setWorld() {
         this.character.world = this;
+    }
+
+    checkCollision() {
+        setInterval(() => {
+            this.level.enemies.forEach((enemy) => {
+                if(this.character.isColliding(enemy)){
+                    this.character.hit();
+                }
+            });
+        }, 200)
     }
 
     draw() {

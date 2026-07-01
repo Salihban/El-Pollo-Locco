@@ -27,6 +27,22 @@ export class Character extends MovableObject {
         'img/2_character_pepe/3_jump/J-39.png'
         ];
 
+        IMAGES_Dead = [
+            'img/2_character_pepe/5_dead/D-51.png',
+            'img/2_character_pepe/5_dead/D-52.png',
+            'img/2_character_pepe/5_dead/D-53.png',
+            'img/2_character_pepe/5_dead/D-54.png',
+            'img/2_character_pepe/5_dead/D-55.png',
+            'img/2_character_pepe/5_dead/D-56.png',
+            'img/2_character_pepe/5_dead/D-57.png'
+        ];
+
+        IMAGES_HURT = [
+            'img/2_character_pepe/4_hurt/H-41.png',
+            'img/2_character_pepe/4_hurt/H-42.png',
+            'img/2_character_pepe/4_hurt/H-43.png'
+        ]
+
         world;
 
     constructor(){
@@ -34,6 +50,8 @@ export class Character extends MovableObject {
         this.loadImage('img/2_character_pepe/2_walk/W-21.png');
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_JUMPING);
+        this.loadImages(this.IMAGES_Dead);
+        this.loadImages(this.IMAGES_HURT);
         this.applyGravity();
         this.animate();
     }
@@ -58,11 +76,15 @@ export class Character extends MovableObject {
 
         setInterval(() => {
 
-            if (this.isAboveGround()) {
+            if (this.isDead()) {
+                this.playAnimation(this.IMAGES_Dead);
+            } else if (this.isHurt()) {
+                this.playAnimation(this.IMAGES_HURT);
+            } else if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
             } else {
-
-            if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+            
+                if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
             // Walk animation
             this.playAnimation(this.IMAGES_WALKING);
             }
