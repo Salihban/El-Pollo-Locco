@@ -4,6 +4,7 @@ import { MovableObject } from "./classOrder.js/movable-object.class.js";
 import { World } from "./classOrder.js/world.class.js";
 import { Keyboard } from "./classOrder.js/keyboard.class.js";
 import { level1 } from "./levels/level1.js";
+import { StatusBar } from "./classOrder.js/status-bar.class.js";
 
 let canvas;
 let world;

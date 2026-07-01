@@ -3,6 +3,7 @@ import { Chicken } from "./chicken.class.js";
 import { Cloud } from "./Cloud.class.js";
 import { BackgroundObject } from "./background-Object.class.js";
 import { level1 } from "../levels/level1.js";
+import { StatusBar } from "./status-bar.class.js";
 
 
 export class World {
@@ -12,14 +13,15 @@ export class World {
     ctx;
     keyboard;
     camera_x = 0;
+    statusBar = new StatusBar();
 
     constructor(canvas, keyboard, level) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
         this.level = level;
-        this.draw();
         this.setWorld();
+        this.draw();
         this.checkCollision();
     }
 
@@ -32,6 +34,7 @@ export class World {
             this.level.enemies.forEach((enemy) => {
                 if(this.character.isColliding(enemy)){
                     this.character.hit();
+                    this.statusBar.setPercentage(this.character.energy);
                 }
             });
         }, 200)
@@ -40,14 +43,16 @@ export class World {
     draw() {
         this.ctx.clearRect(0, 0, canvas.width, canvas.height);
         this.ctx.translate(this.camera_x, 0);
-
         this.addObjectsToMap(this.level.BackgroundObjects);
+        this.ctx.translate(-this.camera_x, 0);
+        // ------ Space for fixed objects -------
+        this.addToMap(this.statusBar);
+        this.ctx.translate(this.camera_x, 0);
+        this.addToMap(this.character);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
-        this.addToMap(this.character);
-
+        
         this.ctx.translate(-this.camera_x, 0);
-
         // draw() is called repeatedly
         let self = this;
         requestAnimationFrame(function() {

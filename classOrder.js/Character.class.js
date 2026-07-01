@@ -1,4 +1,5 @@
 import { MovableObject } from "./movable-object.class.js";
+import { StatusBar } from "./status-bar.class.js";
 
 export class Character extends MovableObject {
     height = 280;

@@ -22,16 +22,6 @@ export class MovableObject  extends DrawableObject{
         return this.y < 160;
     }
 
-    drawFrame(ctx) {
-        if (this.showFrame) {
-        ctx.beginPath();
-        ctx.linewidth = '5';
-        ctx.strokeStyle = 'blue';
-        ctx.rect(this.x, this.y, this.width, this.height);
-        ctx.stroke();
-        }
-    }
-
     //Character.isColiding(Chicken)
     isColliding(mo) {
         return this.x + this.width > mo.x &&
