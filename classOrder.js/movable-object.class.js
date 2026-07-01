@@ -7,7 +7,22 @@ export class MovableObject {
     imageCache = [];
     currentImages = 0;
     speed = 0.15;
+    speedY = 0;
+    acceleration = 1.5;
     otherDirection = false;
+
+    applyGravity() {
+        setInterval(() => {
+            if(this.isAboveGround() || this.speedY > 0) {
+            this.y -= this.speedY;
+            this.speedY -= this.acceleration;
+            }
+        }, 1000 / 60);
+    }
+
+    isAboveGround() {
+        return this.y < 160;
+    }
 
     loadImage(path) {
         this.img = new Image();
@@ -22,10 +37,16 @@ export class MovableObject {
         });
     }
 
+    moveRight(){
+        this.x += this.speed;
+    }
+
     moveLeft(){
-        setInterval(() => {
         this.x -= this.speed;
-        }, 1000 / 60);
+    }
+
+    jump() {
+        this.speedY = 30;
     }
 
     playAnimation(images) {
