@@ -8,6 +8,7 @@ export class MovableObject  extends DrawableObject{
     showFrame = false;
     energy = 100;
     lastHit = 0;
+    isThrowable = false;
 
     applyGravity() {
         setInterval(() => {
@@ -19,7 +20,11 @@ export class MovableObject  extends DrawableObject{
     }
 
     isAboveGround() {
-        return this.y < 160;
+        if (this.isThrowable) {
+            return true;
+        } else {
+            return this.y < 160;
+        }
     }
 
     //Character.isColiding(Chicken)
