@@ -3,6 +3,7 @@ import { Chicken } from "../classOrder.js/chicken.class.js";
 import { Cloud } from "../classOrder.js/Cloud.class.js";
 import { BackgroundObject } from "../classOrder.js/background-Object.class.js";
 import { Endboss } from "../classOrder.js/endboss.class.js";
+import { Coins } from "../classOrder.js/coin.class.js";
 
 export const level1 = new Level(
 [
@@ -10,6 +11,13 @@ export const level1 = new Level(
     new Chicken(),
     new Chicken(),
     new Endboss()
+],
+[
+    new Coins(500, 300),
+    new Coins(800, 250),
+    new Coins(1200, 320),
+    new Coins(1900, 280),
+    new Coins(2100, 350)
 ],
 [
     new Cloud()
