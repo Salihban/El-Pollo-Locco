@@ -4,6 +4,7 @@ import { Cloud } from "./Cloud.class.js";
 import { BackgroundObject } from "./background-Object.class.js";
 import { level1 } from "../levels/level1.js";
 import { StatusBar } from "./status-bar.class.js";
+import { StatusBarCoin } from "./StatusBarCoin.class.js";
 import { ThrowableObject } from "./throwable-object.class.js";
 
 
@@ -16,6 +17,7 @@ export class World {
     keyboard;
     camera_x = 0;
     statusBar = new StatusBar();
+    statusBarCoin = new StatusBarCoin();
     throwableObjects = [];
 
     constructor(canvas, keyboard, level) {
@@ -27,6 +29,7 @@ export class World {
         this.run();
         this.draw();
         this.checkCollisions();
+        this.checkCoinsCollisions();
     }
 
     setWorld() {
@@ -36,6 +39,7 @@ export class World {
     run() {
         setInterval(() => {
             this.checkCollisions();
+            this.checkCoinsCollisions();
             this.checkThrowObjects();
         }, 200);
     }
@@ -56,6 +60,15 @@ export class World {
         });
     }
 
+    checkCoinsCollisions() {
+        this.level.coins.forEach((coins, index) => {
+            if(this.character.isColliding(coins)) {
+                this.level.coins.splice(index, 1);
+                this.statusBarCoin.setPercentage(this.statusBarCoin.percentage + 20);
+            }
+        });
+    }
+
     draw() {
         this.ctx.clearRect(0, 0, canvas.width, canvas.height);
         this.ctx.translate(this.camera_x, 0);
@@ -63,6 +76,7 @@ export class World {
         this.ctx.translate(-this.camera_x, 0);
         // ------ Space for fixed objects -------
         this.addToMap(this.statusBar);
+        this.addToMap(this.statusBarCoin);
         this.ctx.translate(this.camera_x, 0);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.clouds);
