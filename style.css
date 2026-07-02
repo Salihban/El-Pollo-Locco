@@ -7,3 +7,12 @@ body {
 canvas {
     background-color: black;
 }
+
+.toggleFullscreen-btn{
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    font-size: 28px;
+    cursor: pointer;
+    z-index: 10;
+}

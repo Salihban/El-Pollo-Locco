@@ -16,6 +16,16 @@ function init() {
 }
 init();
 
+window.toggleFullscreen = function() {
+    let canvas = document.getElementById('canvas');
+
+    if (!document.fullscreenElement) {
+        canvas.requestFullscreen();
+    } else {
+        document.exitFullscreen();
+    }
+}
+
 window.addEventListener('keydown', (e) => {
     if (e.keyCode == 39){
         keyboard.RIGHT = true;
