@@ -4,6 +4,20 @@ body {
     align-items: center;
     background-image: url('img/creativecanvasshop-cinque-terre-10152364.svg');
     background-repeat: no-repeat;
+    background-position: center;
+    height: 90dvh;
+    font-family: 'zabras', Arial, Helvetica, sans-serif;
+}
+
+@font-face {
+    font-family: 'zabras';
+    src: url('fonts/ZABARS/zabars.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+}
+
+h1{
+    font-size: 64px;
+    letter-spacing: 3px;
+    text-shadow: 4px 4px 8px orangered;
 }
 
 canvas {
