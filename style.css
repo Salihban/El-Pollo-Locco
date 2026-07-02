@@ -2,6 +2,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-image: url('img/creativecanvasshop-cinque-terre-10152364.svg');
+    background-repeat: no-repeat;
 }
 
 canvas {
