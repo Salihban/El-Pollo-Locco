@@ -49,9 +49,12 @@ export class World {
     }
 
     checkThrowObjects() {
-        if (this.keyboard.C) {
+        if (this.keyboard.C && this.character.bottles > 0) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
             this.throwableObjects.push(bottle);
+
+            this.character.bottles--;
+            this.StatusBottleBar.setPercentage(this.character.bottles * 20);
         }
     }
 
@@ -77,6 +80,7 @@ export class World {
         this.level.bottles.forEach((bottles, index) => {
             if(this.character.isColliding(bottles)) {
                 this.level.bottles.splice(index, 1);
+                this.character.bottles++;
                 this.StatusBottleBar.setPercentage(this.statusBarCoin.percentage + 20);
             }
         });
