@@ -74,10 +74,10 @@ export class World {
     }
 
     checkBottleCollisions() {
-        this.level.bottles.forEach((bottle, index) => {
-            if(this.character.isColliding(bottle)) {
-                this.level.bottle.splice(index, 1);
-                this.character.bottles++;
+        this.level.bottles.forEach((bottles, index) => {
+            if(this.character.isColliding(bottles)) {
+                this.level.bottles.splice(index, 1);
+                this.statusBarCoin.setPercentage(this.statusBarCoin.percentage + 20);
             }
         });
     }
