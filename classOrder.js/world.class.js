@@ -77,7 +77,7 @@ export class World {
         this.level.bottles.forEach((bottles, index) => {
             if(this.character.isColliding(bottles)) {
                 this.level.bottles.splice(index, 1);
-                this.statusBarCoin.setPercentage(this.statusBarCoin.percentage + 20);
+                this.StatusBottleBar.setPercentage(this.statusBarCoin.percentage + 20);
             }
         });
     }
