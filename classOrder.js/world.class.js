@@ -5,6 +5,7 @@ import { BackgroundObject } from "./background-Object.class.js";
 import { level1 } from "../levels/level1.js";
 import { StatusBar } from "./status-bar.class.js";
 import { StatusBarCoin } from "./StatusBarCoin.class.js";
+import { StatusBottleBar } from "./statusBottleBar.class.js";
 import { ThrowableObject } from "./throwable-object.class.js";
 
 
@@ -18,6 +19,7 @@ export class World {
     camera_x = 0;
     statusBar = new StatusBar();
     statusBarCoin = new StatusBarCoin();
+    StatusBottleBar = new StatusBottleBar();
     throwableObjects = [];
 
     constructor(canvas, keyboard, level) {
@@ -30,6 +32,7 @@ export class World {
         this.draw();
         this.checkCollisions();
         this.checkCoinsCollisions();
+        this.checkBottleCollisions();
     }
 
     setWorld() {
@@ -88,6 +91,7 @@ export class World {
         // ------ Space for fixed objects -------
         this.addToMap(this.statusBar);
         this.addToMap(this.statusBarCoin);
+        this.addToMap(this.StatusBottleBar);
         this.ctx.translate(this.camera_x, 0);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
