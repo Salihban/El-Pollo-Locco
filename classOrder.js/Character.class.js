@@ -3,7 +3,7 @@ import { StatusBar } from "./status-bar.class.js";
 
 export class Character extends MovableObject {
     height = 280;
-    y = 60;
+    y = 160;
     speed = 10;
     showFrame = true;
 
