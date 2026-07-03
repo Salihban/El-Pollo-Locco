@@ -40,6 +40,7 @@ export class World {
         setInterval(() => {
             this.checkCollisions();
             this.checkCoinsCollisions();
+            this.checkBottleCollisions();
             this.checkThrowObjects();
         }, 200);
     }
@@ -69,21 +70,30 @@ export class World {
         });
     }
 
+    checkBottleCollisions() {
+        this.level.bottles.forEach((bottle, index) => {
+            if(this.character.isColliding(bottle)) {
+                this.level.bottle.splice(index, 1);
+                this.character.bottles++;
+            }
+        });
+    }
+
     draw() {
         this.ctx.clearRect(0, 0, canvas.width, canvas.height);
         this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.level.BackgroundObjects);
+        this.addObjectsToMap(this.level.clouds);
         this.ctx.translate(-this.camera_x, 0);
         // ------ Space for fixed objects -------
         this.addToMap(this.statusBar);
         this.addToMap(this.statusBarCoin);
         this.ctx.translate(this.camera_x, 0);
         this.addToMap(this.character);
-        this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.coins);
+        this.addObjectsToMap(this.level.bottles);
         this.addObjectsToMap(this.throwableObjects);
-        
         
         this.ctx.translate(-this.camera_x, 0);
         // draw() is called repeatedly

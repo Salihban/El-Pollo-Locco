@@ -4,6 +4,7 @@ import { Cloud } from "../classOrder.js/Cloud.class.js";
 import { BackgroundObject } from "../classOrder.js/background-Object.class.js";
 import { Endboss } from "../classOrder.js/endboss.class.js";
 import { Coins } from "../classOrder.js/coin.class.js";
+import { Bottle } from "../classOrder.js/bottle.class.js";
 
 export const level1 = new Level(
 [
@@ -18,6 +19,13 @@ export const level1 = new Level(
     new Coins(1200, 320),
     new Coins(1900, 280),
     new Coins(2100, 350)
+],
+[
+    new Bottle(400, 360),
+    new Bottle(800, 100),
+    new Bottle(1200, 100),
+    new Bottle(1600, 100),
+    new Bottle(2200, 100)
 ],
 [
     new Cloud()
