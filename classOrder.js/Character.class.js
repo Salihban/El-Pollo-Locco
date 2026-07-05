@@ -10,9 +10,9 @@ export class Character extends MovableObject {
 
     offset = {
         top: 90 ,
-        right: 95,
+        right: 20,
         bottom: 10,
-        left: 90
+        left: 20
     };
 
     IMAGES_WALKING = [

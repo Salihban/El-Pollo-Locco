@@ -6,6 +6,13 @@ export class Coins extends MovableObject{
     width = 100;
     height = 100;
 
+    offset = {
+        top: 20,
+        right: 20,
+        bottom: 20,
+        left: 20
+    };
+
     IMAGES_COINS = [
         'img/8_coin/coin_1.png',
         'img/8_coin/coin_2.png'

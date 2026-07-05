@@ -5,7 +5,13 @@ export class Endboss extends MovableObject {
     height = 400;
     width = 250;
     y = 60;
-    showFrame = true;
+
+    offset = {
+        top: 40,
+        right: 0,
+        bottom: 10,
+        left: 0
+    };
 
     IMAGES_WALKING = [
         'img/4_enemie_boss_chicken/2_alert/G5.png',

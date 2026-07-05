@@ -6,6 +6,13 @@ export class Bottle extends MovableObject {
     width = 100;
     height = 100;
 
+    offset = {
+        top: 15,
+        right: 15,
+        bottom: 5,
+        left: 30
+    };
+
     IMAGES_BOTTLES = [
         'img/6_salsa_bottle/1_salsa_bottle_on_ground.png',
         'img/6_salsa_bottle/2_salsa_bottle_on_ground.png'
