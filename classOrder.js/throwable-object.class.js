@@ -13,10 +13,10 @@ isThrowable = true;
     }
 
     trow() {
-        this.speedY = 30;
+        this.speedY = 20;
         this.applyGravity();
         setInterval(() => {
-            this.x += 10;
+            this.x += 30;
         }, 25);
     }
 }
