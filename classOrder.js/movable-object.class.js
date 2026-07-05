@@ -10,6 +10,13 @@ export class MovableObject  extends DrawableObject{
     lastHit = 0;
     isThrowable = false;
 
+    offset = {
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0
+    };
+
     applyGravity() {
         setInterval(() => {
             if(this.isAboveGround() || this.speedY > 0) {
@@ -27,12 +34,21 @@ export class MovableObject  extends DrawableObject{
         }
     }
 
+    getRealFrame() {
+        this.rX = this.x + this.offset.left;
+        this.rY = this.y + this.offset.top;
+        this.rW = this.width - this.offset.left - this.offset.right;
+        this.rH = this.height - this.offset.top - this.offset.bottom;
+    }
+
     //Character.isColiding(Chicken)
     isColliding(mo) {
-        return this.x + this.width > mo.x &&
-            this.y + this.height > mo.y &&
-            this.x < mo.x &&
-            this.y < mo.y + mo.height;
+        this.getRealFrame();
+        mo.getRealFrame();
+        return  this.rX + this.rW > mo.rX &&
+                this.rY + this.rH > mo.rY &&
+                this.rX < mo.rX + mo.rW &&
+                this.rY < mo.rY + mo.rH;
     }
 
     hit() {
