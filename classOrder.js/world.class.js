@@ -81,7 +81,7 @@ export class World {
             if(this.character.isColliding(bottles)) {
                 this.level.bottles.splice(index, 1);
                 this.character.bottles++;
-                this.StatusBottleBar.setPercentage(this.statusBarCoin.percentage + 20);
+                this.StatusBottleBar.setPercentage(this.character.bottles * 20);
             }
         });
     }
