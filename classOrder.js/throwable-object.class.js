@@ -3,12 +3,13 @@ import { MovableObject } from "./movable-object.class.js";
 export class ThrowableObject extends MovableObject {
 isThrowable = true;
 
-    constructor(x, y) {
+    constructor(x, y, otherDirection) {
         super().loadImage('img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png');
         this.x = x;
         this.y = y;
         this.height = 60;
         this.width = 50;
+        this.otherDirection = otherDirection;
         this.trow();
     }
 
@@ -16,7 +17,11 @@ isThrowable = true;
         this.speedY = 20;
         this.applyGravity();
         setInterval(() => {
-            this.x += 30;
+            if (this.otherDirection) {
+                this.x -= 30;
+            } else {
+                this.x += 30;
+            }
         }, 25);
     }
 }
