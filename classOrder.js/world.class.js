@@ -60,10 +60,17 @@ export class World {
 
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
+            if (enemy.isDead) return;
             if(this.character.isColliding(enemy)){
+            if (this.character.speedY < 0 && enemy.die) {
+                enemy.die();
+                this.character.speedY =15;
+            } else {
                 this.character.hit();
-                this.statusBar.setPercentage(this.character.energy);
-            }
+                this.statusBar.setPercentage(this.character.energy);}}
+        });
+        this.level.enemies = this.level.enemies.filter((enemy) => {
+            return !enemy.isDead || new Date().getTime() - enemy.deadTime < 100;
         });
     }
 

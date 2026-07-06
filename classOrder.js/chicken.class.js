@@ -4,6 +4,8 @@ export class Chicken extends MovableObject{
     y = 370;
     height = 70;
     showFrame = true;
+    isDead = false;
+    deadTime = 0;
 
     offset = {
         top: 0,
@@ -20,7 +22,7 @@ export class Chicken extends MovableObject{
 
     constructor() {
         super();
-        this.loadImage('img/3_enemies_chicken/chicken_normal/1_walk/1_w.png');
+        this.loadImage('img/3_enemies_chicken/chicken_normal/2_dead/dead.png');
         this.loadImages(this.IMAGES_WALKING);
 
         this.x = 200 + Math.random() * 500;
@@ -36,5 +38,12 @@ export class Chicken extends MovableObject{
         setInterval(() => {
             this.playAnimation(this.IMAGES_WALKING);
         }, 200);
+}
+
+die() {
+    this.isDead = true;
+    this.deadTime = new Date().getTime();
+    this.loadImage('img/3_enemies_chicken/chicken_normal/2_dead/dead.png');
+    this.speed = 0;
 }
 }
