@@ -35,6 +35,7 @@ export class World {
         this.checkCollisions();
         this.checkCoinsCollisions();
         this.checkBottleCollisions();
+        this.removeDeadEnemies();
     }
 
     setWorld() {
@@ -48,6 +49,7 @@ export class World {
             this.checkCoinsCollisions();
             this.checkBottleCollisions();
             this.checkThrowObjects();
+            this.removeDeadEnemies();
         }, 50);
     }
 
@@ -72,7 +74,7 @@ export class World {
                 endboss.die();
             }
             }
-        })
+        });
     }
 
     checkCollisions() {
@@ -86,8 +88,17 @@ export class World {
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy);}}
         });
-        this.level.enemies = this.level.enemies.filter((enemy) => {
-            return !enemy.isDead || new Date().getTime() - enemy.deadTime < 100;
+    }
+
+    removeDeadEnemies() {
+        this.level.enemies = this.level.enemies.filter(enemy => {
+            if (!enemy.isDead) return true;
+            let now = new Date().getTime();
+            if (enemy.isEndboss) {
+                return now - enemy.deadTime < 2000;
+            } else {
+                return now - enemy.deadTime < 100;
+            }
         });
     }
 

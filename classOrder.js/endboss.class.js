@@ -9,6 +9,8 @@ export class Endboss extends MovableObject {
     isEndboss = true;
     deadTime = 0;
     showFrame = true;
+    deadTime = 0;
+    deadanimationPlayed = false;
 
     offset = {
         top: 0,
@@ -28,10 +30,20 @@ export class Endboss extends MovableObject {
         'img/4_enemie_boss_chicken/2_alert/G12.png'
     ];
 
+    IMAGES_DEAD = [
+        'img/4_enemie_boss_chicken/5_dead/G24.png',
+        'img/4_enemie_boss_chicken/5_dead/G25.png',
+        'img/4_enemie_boss_chicken/5_dead/G26.png'
+    ];
+
+    DeadAnimationIndex = 0;
+    DeadAnimationInterval;
+
     constructor() {
         super();
         this.loadImage(this.IMAGES_WALKING[0]);
         this.loadImages(this.IMAGES_WALKING);
+        this.loadImages(this.IMAGES_DEAD);
         
         this.x = 2500;
         this.animate();
@@ -39,14 +51,33 @@ export class Endboss extends MovableObject {
 
     animate() {
         setInterval(() => {
-            this.playAnimation(this.IMAGES_WALKING);
-        }, 200);
+            if (this.isDead) {
+                this.playAnimation(this.IMAGES_DEAD);
+            } else { 
+                this.playAnimation(this.IMAGES_WALKING);
+            }
+        }, 3000);  
     }
 
     die() {
-    this.isDead = true;
-    this.deadTime = new Date().getTime();
-    this.loadImage('img/4_enemie_boss_chicken/5_dead/G24.png');
-    this.speed = 0;
+        if (this.isDead) return;
+        this.isDead = true;
+        this.deadTime = new Date().getTime();
+        this.deadanimationPlayed = false;
+        this.DeadAnimationIndex = 0;
+        this.speed = 0;
+        this.startDeadAnimation();
+}
+
+startDeadAnimation() {
+    this.DeadAnimationInterval = setInterval(() => {
+        this.DeadAnimationIndex++;
+        if (this.DeadAnimationIndex < this.IMAGES_DEAD.length) {
+            this.loadImage(this.IMAGES_DEAD[this.DeadAnimationIndex]);
+        } else {
+            clearInterval(this.DeadAnimationInterval);
+            this.deadanimationPlayed = true;
+        }
+    }, 300);
 }
 }
