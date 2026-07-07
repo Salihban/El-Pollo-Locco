@@ -1,11 +1,12 @@
 import { Level } from "../classOrder.js/level.class.js";
 import { Chicken } from "../classOrder.js/chicken.class.js";
+import { SmallChicken } from "../classOrder.js/smallChicken.class.js";
 import { Cloud } from "../classOrder.js/Cloud.class.js";
 import { BackgroundObject } from "../classOrder.js/background-Object.class.js";
 import { Endboss } from "../classOrder.js/endboss.class.js";
 import { Coins } from "../classOrder.js/coin.class.js";
 import { Bottle } from "../classOrder.js/bottle.class.js";
-import { SmallChicken } from "../classOrder.js/smallChicken.class.js";
+
 
 export const level1 = new Level(
 [

@@ -4,6 +4,7 @@ import { Cloud } from "./Cloud.class.js";
 import { BackgroundObject } from "./background-Object.class.js";
 import { level1 } from "../levels/level1.js";
 import { StatusBar } from "./status-bar.class.js";
+import { StatusBarEndboss } from "./statusBarEndboss.class.js";
 import { StatusBarCoin } from "./StatusBarCoin.class.js";
 import { StatusBottleBar } from "./statusBottleBar.class.js";
 import { ThrowableObject } from "./throwable-object.class.js";
@@ -18,6 +19,7 @@ export class World {
     keyboard;
     camera_x = 0;
     statusBar = new StatusBar();
+    statusBarEndboss = new StatusBarEndboss();
     statusBarCoin = new StatusBarCoin();
     StatusBottleBar = new StatusBottleBar();
     throwableObjects = [];
@@ -42,10 +44,11 @@ export class World {
     run() {
         setInterval(() => {
             this.checkCollisions();
+            this.checkBottleHitsEndboss();
             this.checkCoinsCollisions();
             this.checkBottleCollisions();
             this.checkThrowObjects();
-        }, 200);
+        }, 50);
     }
 
     checkThrowObjects() {
@@ -58,11 +61,25 @@ export class World {
         }
     }
 
+    checkBottleHitsEndboss() {
+        this.throwableObjects.forEach((bottle, index) => {
+            let endboss = this.level.enemies.find(enemy => enemy.isEndboss === true);
+            if (endboss && bottle.isColliding(endboss)) {
+                this.throwableObjects.splice(index, 1);
+                endboss.energy -= 20;
+                this.statusBarEndboss.setPercentage(endboss.energy);
+            if (endboss.energy <= 0) {
+                endboss.die();
+            }
+            }
+        })
+    }
+
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
             if (enemy.isDead) return;
             if(this.character.isColliding(enemy)){
-            if (this.character.speedY < 0 && enemy.die) {
+            if (this.character.speedY < 0 && enemy.die && !enemy.isEndboss) {
                 enemy.die();
                 this.character.speedY =15;
             } else {
@@ -101,6 +118,7 @@ export class World {
         this.ctx.translate(-this.camera_x, 0);
         // ------ Space for fixed objects -------
         this.addToMap(this.statusBar);
+        this.addToMap(this.statusBarEndboss);
         this.addToMap(this.statusBarCoin);
         this.addToMap(this.StatusBottleBar);
         this.ctx.translate(this.camera_x, 0);

@@ -14,13 +14,13 @@ isThrowable = true;
     }
 
     trow() {
-        this.speedY = 20;
+        this.speedY = 25;
         this.applyGravity();
         setInterval(() => {
             if (this.otherDirection) {
                 this.x -= 30;
             } else {
-                this.x += 30;
+                this.x += 10;
             }
         }, 25);
     }
