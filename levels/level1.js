@@ -5,12 +5,16 @@ import { BackgroundObject } from "../classOrder.js/background-Object.class.js";
 import { Endboss } from "../classOrder.js/endboss.class.js";
 import { Coins } from "../classOrder.js/coin.class.js";
 import { Bottle } from "../classOrder.js/bottle.class.js";
+import { SmallChicken } from "../classOrder.js/smallChicken.class.js";
 
 export const level1 = new Level(
 [
     new Chicken(),
     new Chicken(),
     new Chicken(),
+    new SmallChicken(),
+    new SmallChicken(),
+    new SmallChicken(),
     new Endboss()
 ],
 [
