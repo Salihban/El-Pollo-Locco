@@ -20,6 +20,10 @@ document.getElementById("startGame").addEventListener("click", () => {
     world = new World(canvas, keyboard, level1);
 });
 
+window.showYouLoseScreen = function () {
+    document.getElementById("YouLoseScreen").style.display = "block";
+}
+
 window.toggleFullscreen = function() {
     let canvas = document.getElementById('canvas');
 

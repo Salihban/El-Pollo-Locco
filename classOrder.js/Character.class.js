@@ -7,6 +7,7 @@ export class Character extends MovableObject {
     speed = 10;
     showFrame = true;
     bottles = 0;
+    gameOver = false;
 
     offset = {
         top: 90,
@@ -82,8 +83,12 @@ export class Character extends MovableObject {
         }, 1000 / 25);
 
         setInterval(() => {
-            if (this.isDead()) {
+            if (this.isDead() && !this.gameOver) {
+                this.gameOver = true;
                 this.playAnimation(this.IMAGES_Dead);
+                setTimeout(() => {
+                    window.showYouLoseScreen();
+                }, 1500);
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
             } else if (this.isAboveGround()) {
