@@ -145,7 +145,13 @@ export class World {
         this.addObjectsToMap(this.level.bottles);
         this.addObjectsToMap(this.throwableObjects);
         if (this.gameOver) {
+            this.ctx.save();
+            this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+            this.ctx.fillerStyle = 'black';
+            this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
             this.ctx.drawImage(this.gameOverImage, 0, 0, this.canvas.width, this.canvas.height);
+            this.ctx.drawImage(
+                this.gameOverImage, 0, 0, this.canvas.width, this.canvas.height);
         }
         this.ctx.translate(-this.camera_x, 0);
         // draw() is called repeatedly
