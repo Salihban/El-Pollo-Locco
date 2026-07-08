@@ -25,6 +25,8 @@ export class World {
     throwableObjects = [];
     gameOverImage = new Image();
     gameOver = false;
+    gameWonImage = new Image();
+    gameWon = false;
 
     constructor(canvas, keyboard, level) {
         this.ctx = canvas.getContext('2d');
@@ -32,6 +34,7 @@ export class World {
         this.keyboard = keyboard;
         this.level = level;
         this.gameOverImage.src = 'img/You won, you lost/You lost.png';
+        this.gameWonImage.src = 'img/You won, you lost/You won A.png';
         this.setWorld();
         this.run();
         this.draw();
@@ -53,10 +56,13 @@ export class World {
             this.checkBottleCollisions();
             this.checkThrowObjects();
             this.removeDeadEnemies();
+            let endboss = this.level.enemies.find(enemy => enemy.isEndboss);
+            if (endboss && endboss.isDead && endboss.deadanimationPlayed){
+            this.gameWon = true;}
+            if (this.character.isDead()){
+            this.gameOver = true;}
+            this.removeDeadEnemies();
         }, 50);
-        if (this.character.isDead()){
-            this.gameOver = true;
-        }
     }
 
     checkThrowObjects() {
@@ -147,11 +153,20 @@ export class World {
         if (this.gameOver) {
             this.ctx.save();
             this.ctx.setTransform(1, 0, 0, 1, 0, 0);
-            this.ctx.fillerStyle = 'black';
+            this.ctx.fillStyle = 'black';
             this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
             this.ctx.drawImage(this.gameOverImage, 0, 0, this.canvas.width, this.canvas.height);
-            this.ctx.drawImage(
-                this.gameOverImage, 0, 0, this.canvas.width, this.canvas.height);
+            this.ctx.restore();
+            return;
+        }
+        if (this.gameWon) {
+            this.ctx.save();
+            this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+            this.ctx.fillStyle = 'black';
+            this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+            this.ctx.drawImage(this.gameWonImage, 0, 0, this.canvas.width, this.canvas.height);
+            this.ctx.restore();
+            return;
         }
         this.ctx.translate(-this.camera_x, 0);
         // draw() is called repeatedly
