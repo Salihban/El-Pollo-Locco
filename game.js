@@ -3,7 +3,6 @@ import { Chicken } from "./classOrder.js/chicken.class.js";
 import { MovableObject } from "./classOrder.js/movable-object.class.js";
 import { World } from "./classOrder.js/world.class.js";
 import { Keyboard } from "./classOrder.js/keyboard.class.js";
-import { level1 } from "./levels/level1.js";
 import { StatusBar } from "./classOrder.js/status-bar.class.js";
 
 let canvas;
@@ -15,9 +14,11 @@ function init() {
 }
 init();
 
-document.getElementById("startGame").addEventListener("click", () => {
+document.getElementById("startGame").addEventListener("click", async () => {
     document.getElementById('startScreen').style.display = 'none';
-    world = new World(canvas, keyboard, level1);
+
+    const levelModul = await import("./levels/level1.js");
+    world = new World(canvas, keyboard, levelModul.level1);
 });
 
 window.showYouLoseScreen = function () {

@@ -2,7 +2,6 @@ import { Character } from "./Character.class.js";
 import { Chicken } from "./chicken.class.js";
 import { Cloud } from "./Cloud.class.js";
 import { BackgroundObject } from "./background-Object.class.js";
-import { level1 } from "../levels/level1.js";
 import { StatusBar } from "./status-bar.class.js";
 import { StatusBarEndboss } from "./statusBarEndboss.class.js";
 import { StatusBarCoin } from "./StatusBarCoin.class.js";
@@ -13,7 +12,7 @@ import { ThrowableObject } from "./throwable-object.class.js";
 
 export class World {
     character = new Character();
-    level = level1;
+    level;
     canvas;
     ctx;
     keyboard;
