@@ -7,7 +7,6 @@ import { Endboss } from "../classOrder.js/endboss.class.js";
 import { Coins } from "../classOrder.js/coin.class.js";
 import { Bottle } from "../classOrder.js/bottle.class.js";
 
-
 export const level1 = new Level(
 [
     new Chicken(),

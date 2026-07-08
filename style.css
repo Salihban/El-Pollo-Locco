@@ -20,6 +20,7 @@ body {
     align-items: end;
     
     position: absolute;
+    top: 158px;
     width: 720px;
     height: 480px;
     background: black;
@@ -33,9 +34,11 @@ body {
 
 #startScreen button{
     z-index: 2;
-    margin-bottom: 40px;
+    width: 120px;
+    margin-bottom: 10px;
     padding: 12px 32px;
     font-size: 24px;
+    background: rgba(0, 0, 0, 0.5);
     cursor: pointer;
 }
 
@@ -56,4 +59,6 @@ canvas{
     font-size: 28px;
     cursor: pointer;
     z-index: 10;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
 }

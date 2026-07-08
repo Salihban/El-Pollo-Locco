@@ -12,9 +12,13 @@ let keyboard = new Keyboard();
 
 function init() {
     canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard, level1);
 }
 init();
+
+window.startGame = function () {
+    document.getElementById('startScreen').style.display = 'none';
+    world = new World(canvas, keyboard, level1);
+}
 
 window.toggleFullscreen = function() {
     let canvas = document.getElementById('canvas');
