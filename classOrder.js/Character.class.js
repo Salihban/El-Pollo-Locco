@@ -87,7 +87,7 @@ export class Character extends MovableObject {
                 this.gameOver = true;
                 this.playAnimation(this.IMAGES_Dead);
                 setTimeout(() => {
-                    window.showYouLoseScreen();
+                    this.world.gameOver = true;
                 }, 1500);
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);

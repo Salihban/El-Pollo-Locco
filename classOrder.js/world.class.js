@@ -23,12 +23,15 @@ export class World {
     statusBarCoin = new StatusBarCoin();
     StatusBottleBar = new StatusBottleBar();
     throwableObjects = [];
+    gameOverImage = new Image();
+    gameOver = false;
 
     constructor(canvas, keyboard, level) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
         this.level = level;
+        this.gameOverImage.src = 'img/You won, you lost/You lost.png';
         this.setWorld();
         this.run();
         this.draw();
@@ -51,6 +54,9 @@ export class World {
             this.checkThrowObjects();
             this.removeDeadEnemies();
         }, 50);
+        if (this.character.isDead()){
+            this.gameOver = true;
+        }
     }
 
     checkThrowObjects() {
@@ -138,7 +144,9 @@ export class World {
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.bottles);
         this.addObjectsToMap(this.throwableObjects);
-        
+        if (this.gameOver) {
+            this.ctx.drawImage(this.gameOverImage, 0, 0, this.canvas.width, this.canvas.height);
+        }
         this.ctx.translate(-this.camera_x, 0);
         // draw() is called repeatedly
         let self = this;
