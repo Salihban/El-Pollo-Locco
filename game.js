@@ -15,10 +15,10 @@ function init() {
 }
 init();
 
-window.startGame = function () {
+document.getElementById("startGame").addEventListener("click", () => {
     document.getElementById('startScreen').style.display = 'none';
     world = new World(canvas, keyboard, level1);
-}
+});
 
 window.toggleFullscreen = function() {
     let canvas = document.getElementById('canvas');

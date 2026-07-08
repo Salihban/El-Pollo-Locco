@@ -9,7 +9,7 @@ export class Character extends MovableObject {
     bottles = 0;
 
     offset = {
-        top: 90 ,
+        top: 90,
         right: 20,
         bottom: 10,
         left: 20
