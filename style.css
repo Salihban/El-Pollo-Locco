@@ -14,13 +14,38 @@ body {
     src: url('fonts/ZABARS/zabars.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
 }
 
+#startScreen{
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    
+    position: absolute;
+    width: 720px;
+    height: 480px;
+    background: black;
+}
+
+#startScreen img{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+#startScreen button{
+    z-index: 2;
+    margin-bottom: 40px;
+    padding: 12px 32px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
 h1{
     font-size: 64px;
     letter-spacing: 3px;
     text-shadow: 4px 4px 8px orangered;
 }
 
-canvas {
+canvas{
     background-color: black;
 }
 
