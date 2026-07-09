@@ -63,6 +63,6 @@ removeBottle = false;
         
         setTimeout(() => {
             this.removeBottle = true;
-        }, 500);
+        }, 200);
     }
 }
