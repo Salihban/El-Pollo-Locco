@@ -26,6 +26,8 @@ export class World {
     gameOver = false;
     gameWonImage = new Image();
     gameWon = false;
+    intervalIds = [];
+    requestAnimationFrameId;
 
     constructor(canvas, keyboard, level) {
         this.ctx = canvas.getContext('2d');
@@ -48,7 +50,7 @@ export class World {
     }
 
     run() {
-        setInterval(() => {
+        let interval = setInterval(() => {
             this.checkCollisions();
             this.checkBottleHitsEndboss();
             this.checkCoinsCollisions();
@@ -62,6 +64,7 @@ export class World {
             this.gameOver = true;}
             this.removeDeadEnemies();
         }, 50);
+        this.intervalIds.push(interval);
     }
 
     checkThrowObjects() {
@@ -150,15 +153,10 @@ export class World {
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.bottles);
         this.addObjectsToMap(this.throwableObjects);
-        if (this.gameOver) {
-            this.ctx.save();
-            this.ctx.setTransform(1, 0, 0, 1, 0, 0);
-            this.ctx.fillStyle = 'black';
-            this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-            this.ctx.drawImage(this.gameOverImage, 0, 0, this.canvas.width, this.canvas.height);
-            this.ctx.restore();
-            return;
-        }
+            if (this.gameOver) {
+                document.getElementById('YouLoseScreen').style.display = "block";
+                return;
+            }
         if (this.gameWon) {
             this.ctx.save();
             this.ctx.setTransform(1, 0, 0, 1, 0, 0);
@@ -171,7 +169,7 @@ export class World {
         this.ctx.translate(-this.camera_x, 0);
         // draw() is called repeatedly
         let self = this;
-        requestAnimationFrame(function() {
+        this.animationFrameId = requestAnimationFrame(function() {
             self.draw();
         });
         }
@@ -203,5 +201,10 @@ export class World {
         flipImageBack(mo) {
             mo.x = mo.x * -1;
             this.ctx.restore();
+        }
+
+        stopGame() {
+            this.intervalIds.forEach(id => clearInterval(id));
+            cancelAnimationFrame(this.animationFrameId);
         }
 }

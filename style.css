@@ -42,6 +42,43 @@ body {
     cursor: pointer;
 }
 
+#YouLoseScreen{
+    position: absolute;
+    top: 150px;
+    left: 0;
+    width: 720px;
+    height: 480px;
+    z-index: 20;
+    background-color: rgb(0, 0, 0);
+}
+
+#YouLoseScreen img{
+    width: 720px;
+    height: 480px;
+}
+
+.HomeBtn{
+    position: absolute;
+    top: 400px;
+    left: 300px;
+    z-index: 30;
+    padding: 12px 24px;
+    font-size: 20px;
+    background-color: orangered;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0px 4px 10px rgb(0, 0, 0, 0.3);
+    transition: transform 0.1s ease;
+}
+
+.HomeBtn:hover{
+transform: scale(1.05);
+background-color: orangered;
+}
+
 h1{
     font-size: 64px;
     letter-spacing: 3px;
@@ -52,10 +89,16 @@ canvas{
     background-color: black;
 }
 
+#gameContainer{
+    display: none;
+    position: relative;
+    width: 720px;
+    height: 480px;
+}
+
 .toggleFullscreen-btn{
     position: absolute;
-    right: 300px;
-    bottom: 280px;
+    right: 690px;
     font-size: 24px;
     cursor: pointer;
     z-index: 10;

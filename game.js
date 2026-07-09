@@ -16,6 +16,7 @@ init();
 
 document.getElementById("startGame").addEventListener("click", async () => {
     document.getElementById('startScreen').style.display = 'none';
+    document.getElementById('gameContainer').style.display = 'block';
 
     const levelModul = await import("./levels/level1.js");
     world = new World(canvas, keyboard, levelModul.level1);
@@ -24,6 +25,11 @@ document.getElementById("startGame").addEventListener("click", async () => {
 window.showYouLoseScreen = function () {
     document.getElementById("YouLoseScreen").style.display = "block";
 }
+
+document.getElementById("homeScreen").addEventListener("click", async () => {
+    location.reload();
+});
+
 
 window.toggleFullscreen = function() {
     let canvas = document.getElementById('canvas');
