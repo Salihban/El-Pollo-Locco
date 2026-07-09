@@ -39,9 +39,9 @@ removeBottle = false;
         this.applyGravity();
         setInterval(() => {
             if (this.otherDirection) {
-                this.x -= 30;
+                this.x -= 20;
             } else {
-                this.x += 10;
+                this.x += 20;
             }
         }, 25);
     }
