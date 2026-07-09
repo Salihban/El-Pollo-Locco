@@ -29,7 +29,7 @@ export const level1 = new Level(
     new Bottle(800, 350),
     new Bottle(1200,350),
     new Bottle(1600, 350),
-    new Bottle(2200, 350  )
+    new Bottle(2200, 350)
 ],
 [
     new Cloud()

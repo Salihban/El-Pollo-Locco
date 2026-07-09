@@ -75,10 +75,10 @@ export class World {
     }
 
     checkBottleHitsEndboss() {
-        this.throwableObjects.forEach((bottle, index) => {
+        this.throwableObjects.forEach((bottle) => {
             let endboss = this.level.enemies.find(enemy => enemy.isEndboss === true);
-            if (endboss && bottle.isColliding(endboss)) {
-                this.throwableObjects.splice(index, 1);
+            if (endboss && bottle.isColliding(endboss) && !bottle.hasSplashed) {
+                bottle.splash();
                 endboss.energy -= 20;
                 this.statusBarEndboss.setPercentage(endboss.energy);
             if (endboss.energy <= 0) {
@@ -86,6 +86,7 @@ export class World {
             }
             }
         });
+        this.throwableObjects = this.throwableObjects.filter(bottle => !bottle.removeBottle);
     }
 
     checkCollisions() {
