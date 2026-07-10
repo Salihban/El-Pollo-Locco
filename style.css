@@ -44,7 +44,7 @@ body {
 
 #YouLoseScreen{
     position: absolute;
-    top: 150px;
+    top: 0px;
     left: 0;
     width: 720px;
     height: 480px;
