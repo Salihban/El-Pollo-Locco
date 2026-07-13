@@ -13,6 +13,7 @@
     <img src="img/9_intro_outro_screens/start/startscreen_1.png" alt="start screen">
     <button id="startGame">Start</button>
     <button id="openControls" >Controls</button>
+    <button onclick="toggleFullscreen()" class="toggleFullscreen-btn">[ ]</button>
 </div>
 <div id="controlsDialog" class="dialogOverlay">
     <div class="controlsDialog">
@@ -43,12 +44,13 @@
 
     <div id="gameContainer">
             <canvas id="canvas" width="720" height="480"></canvas>
-            <button onclick="toggleFullscreen()" class="toggleFullscreen-btn">[ ]</button>
         <div id="YouLoseScreen" style="display: none;">
             <img src="img/You won, you lost/You lost.png" alt="">
             <button class="HomeBtn" id="homeScreen">Home</button>
+            <button id="resetGame" class="resetBtn">Restart</button>
         </div>
     </div>
+    
     <script type="module" src="game.js"></script>
 </body>
 </html>

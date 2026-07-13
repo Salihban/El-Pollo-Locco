@@ -17,12 +17,19 @@ function init() {
 }
 init();
 
+async function startNewGame() {
+    const levelModul = await import("./levels/level1.js");
+    const freshLevel = levelModul.createLevel1();
+
+    keyboard = new Keyboard();
+    world = new World(canvas, keyboard, freshLevel);
+}
+
 document.getElementById("startGame").addEventListener("click", async () => {
     document.getElementById('startScreen').style.display = 'none';
     document.getElementById('gameContainer').style.display = 'block';
 
-    const levelModul = await import("./levels/level1.js");
-    world = new World(canvas, keyboard, levelModul.level1);
+    await startNewGame();
 });
 
 openControlsButton.addEventListener('click', () => {
@@ -47,6 +54,20 @@ document.getElementById("homeScreen").addEventListener("click", async () => {
     location.reload();
 });
 
+document.getElementById('resetGame').addEventListener('click', () => {
+    sessionStorage.setItem('restartGame', 'true');
+    location.reload();
+});
+
+window.addEventListener('load', async () => {
+    const shouldRestart = sessionStorage.getItem('restartGame');
+    if (shouldRestart === 'true') {
+        sessionStorage.removeItem('restartGame');
+        document.getElementById('startScreen').style.display = 'none';
+        document.getElementById('gameContainer').style.display = 'block';
+    }
+    await startNewGame();
+});
 
 window.toggleFullscreen = function() {
     let canvas = document.getElementById('canvas');

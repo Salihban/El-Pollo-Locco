@@ -26,8 +26,8 @@ export class World {
     gameOver = false;
     gameWonImage = new Image();
     gameWon = false;
-    intervalIds = [];
-    requestAnimationFrameId;
+    intervalls = [];
+    animationFrameId = null;
 
     constructor(canvas, keyboard, level) {
         this.ctx = canvas.getContext('2d');
@@ -57,14 +57,14 @@ export class World {
             this.checkBottleCollisions();
             this.checkThrowObjects();
             this.removeDeadEnemies();
-            let endboss = this.level.enemies.find(enemy => enemy.isEndboss);
+            const endboss = this.level.enemies.find(enemy => enemy.isEndboss);
             if (endboss && endboss.isDead && endboss.deadanimationPlayed){
             this.gameWon = true;}
             if (this.character.isDead()){
             this.gameOver = true;}
             this.removeDeadEnemies();
         }, 50);
-        this.intervalIds.push(interval);
+        this.intervalls.push(interval);
     }
 
     checkThrowObjects() {
@@ -204,7 +204,13 @@ export class World {
         }
 
         stopGame() {
-            this.intervalIds.forEach(id => clearInterval(id));
+            this.intervalls.forEach((id) => {
+                clearInterval(id);
+            });
+            this.intervalls = [];
+        if (this.animationFrameId) {
             cancelAnimationFrame(this.animationFrameId);
+            this.animationFrameId = null;
+            }
         }
-}
+    }

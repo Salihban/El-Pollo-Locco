@@ -7,7 +7,8 @@ import { Endboss } from "../classOrder.js/endboss.class.js";
 import { Coins } from "../classOrder.js/coin.class.js";
 import { Bottle } from "../classOrder.js/bottle.class.js";
 
-export const level1 = new Level(
+export function createLevel1(){
+return new Level(
 [
     new Chicken(),
     new Chicken(),
@@ -64,3 +65,4 @@ export const level1 = new Level(
     new BackgroundObject('img/5_background/layers/1_first_layer/2.png', 719*3),
 ]
 );
+}
