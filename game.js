@@ -65,8 +65,11 @@ window.addEventListener('load', async () => {
         sessionStorage.removeItem('restartGame');
         document.getElementById('startScreen').style.display = 'none';
         document.getElementById('gameContainer').style.display = 'block';
+        document.getElementById('YouLoseScreen').style.display = 'none';
+
+        await startNewGame();
     }
-    await startNewGame();
+    
 });
 
 window.toggleFullscreen = function() {
