@@ -9,6 +9,7 @@ export class Character extends MovableObject {
     showFrame = true;
     bottles = 0;
     gameOver = false;
+    deadSoundPlayed = false;
 
     offset = {
         top: 90,

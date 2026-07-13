@@ -7,6 +7,7 @@ import { StatusBarEndboss } from "./statusBarEndboss.class.js";
 import { StatusBarCoin } from "./StatusBarCoin.class.js";
 import { StatusBottleBar } from "./statusBottleBar.class.js";
 import { ThrowableObject } from "./throwable-object.class.js";
+import { sounds } from "./Sounds.class.js";
 
 
 
@@ -120,6 +121,7 @@ export class World {
     checkCoinsCollisions() {
         this.level.coins.forEach((coins, index) => {
             if(this.character.isColliding(coins)) {
+                sounds.playSound(sounds.coinCollect);
                 this.level.coins.splice(index, 1);
                 this.statusBarCoin.setPercentage(this.statusBarCoin.percentage + 20);
             }
