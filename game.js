@@ -8,6 +8,9 @@ import { StatusBar } from "./classOrder.js/status-bar.class.js";
 let canvas;
 let world;
 let keyboard = new Keyboard();
+const controlsDialog = document.getElementById('controlsDialog');
+const openControlsButton = document.getElementById('openControls');
+const closeControlsButton = document.getElementById('closeControls');
 
 function init() {
     canvas = document.getElementById('canvas');
@@ -21,6 +24,20 @@ document.getElementById("startGame").addEventListener("click", async () => {
     const levelModul = await import("./levels/level1.js");
     world = new World(canvas, keyboard, levelModul.level1);
 });
+
+openControlsButton.addEventListener('click', () => {
+    controlsDialog.style.display = 'flex';
+});
+
+closeControlsButton.addEventListener('click', () => {
+    controlsDialog.style.display = 'none';
+});
+
+controlsDialog.addEventListener('click', (event) => {
+    if (event.target === controlsDialog) {
+        controlsDialog.style.display = 'none';
+    }
+})
 
 window.showYouLoseScreen = function () {
     document.getElementById("YouLoseScreen").style.display = "block";

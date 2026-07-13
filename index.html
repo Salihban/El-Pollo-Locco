@@ -6,14 +6,37 @@
     <title>El Pollo Loco</title>
     
     <link rel="icon" type="image/x-icon" href="img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png">
-
-    <script type="module" src="game.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div id="startScreen">
     <img src="img/9_intro_outro_screens/start/startscreen_1.png" alt="start screen">
     <button id="startGame">Start</button>
+    <button id="openControls" >Controls</button>
+</div>
+<div id="controlsDialog" class="dialogOverlay">
+    <div class="controlsDialog">
+        <button id="closeControls" class="closeDialog">X</button>
+
+        <h2>Controls</h2>
+
+        <div class="controlsRow">
+        <span>⇨</span>
+        <span>Right</span>
+        </div>
+        <div class="controlsRow">
+        <span>⇦</span>
+        <span>Left</span>
+        </div>
+        <div class="controlsRow">
+        <span>Space</span>
+        <span>Jump</span>
+        </div>
+        <div class="controlsRow">
+        <span>C</span>
+        <span>Throw</span>
+        </div>
+    </div>
 </div>
 
 <h1>El Pollo loco</h1>
@@ -26,5 +49,6 @@
             <button class="HomeBtn" id="homeScreen">Home</button>
         </div>
     </div>
+    <script type="module" src="game.js"></script>
 </body>
 </html>
