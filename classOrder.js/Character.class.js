@@ -1,5 +1,6 @@
 import { MovableObject } from "./movable-object.class.js";
 import { StatusBar } from "./status-bar.class.js";
+import { sounds } from "./Sounds.class.js";
 
 export class Character extends MovableObject {
     height = 280;
@@ -93,7 +94,14 @@ export class Character extends MovableObject {
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x){
                 this.moveRight();
                 this.otherDirection = false;
-            } 
+                sounds.startRunSound();
+            } else if (this.world.keyboard.left && this.x > 0) {
+                this.moveLeft();
+                this.otherDirection = true;
+                sounds.startRunSound();
+            } else {
+                sounds.stopRundSound();
+            }
             
             if (this.world.keyboard.LEFT && this.x > 0){
                 this.moveLeft();

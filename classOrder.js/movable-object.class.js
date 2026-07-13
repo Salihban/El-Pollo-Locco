@@ -1,4 +1,5 @@
 import { DrawableObject } from "./drawable-object.class.js";
+import { sounds } from "./Sounds.class.js";
 
 export class MovableObject  extends DrawableObject{
     speed = 0.15;
@@ -53,6 +54,7 @@ export class MovableObject  extends DrawableObject{
 
     hit() {
         this.energy -= 5;
+        sounds.playSound(sounds.characterDamage);
         if (this.energy < 0) {
             this.energy = 0;
         } else {
@@ -72,6 +74,7 @@ export class MovableObject  extends DrawableObject{
 
     moveRight(){
         this.x += this.speed;
+        
     }
 
     moveLeft(){
@@ -80,6 +83,7 @@ export class MovableObject  extends DrawableObject{
 
     jump() {
         this.speedY = 25;
+        sounds.playSound(sounds.characterJump);
     }
 
     playAnimation(images) {
