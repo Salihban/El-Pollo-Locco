@@ -127,6 +127,28 @@ transform: scale(1.05);
 background-color: orangered;
 }
 
+.resetBtn{
+    position: absolute;
+    top: 400px;
+    left: 450px;
+    z-index: 30;
+    padding: 12px 24px;
+    font-size: 20px;
+    background-color: orangered;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0px 4px 10px rgb(0, 0, 0, 0.3);
+    transition: transform 0.1s ease;
+}
+
+.resetBtn:hover{
+transform: scale(1.05);
+background-color: orangered;
+}
+
 h1{
     font-size: 64px;
     letter-spacing: 3px;
