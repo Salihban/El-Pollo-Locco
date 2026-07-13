@@ -131,6 +131,7 @@ export class World {
     checkBottleCollisions() {
         this.level.bottles.forEach((bottles, index) => {
             if(this.character.isColliding(bottles)) {
+                sounds.playSound(sounds.bottleCollect);
                 this.level.bottles.splice(index, 1);
                 this.character.bottles++;
                 this.StatusBottleBar.setPercentage(this.character.bottles * 20);
