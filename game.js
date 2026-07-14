@@ -61,6 +61,15 @@ document.getElementById('resetGame').addEventListener('click', () => {
     location.reload();
 });
 
+document.getElementById("homeScreenWon").addEventListener("click", async () => {
+    location.reload();
+});
+
+document.getElementById('resetGameWon').addEventListener('click', () => {
+    sessionStorage.setItem('restartGame', 'true');
+    location.reload();
+});
+
 window.addEventListener('load', async () => {
     const shouldRestart = sessionStorage.getItem('restartGame');
     if (shouldRestart === 'true') {
