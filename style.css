@@ -156,7 +156,9 @@ h1{
 }
 
 canvas{
-    background-color: black;
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 
 #gameContainer{
@@ -164,6 +166,7 @@ canvas{
     position: relative;
     width: 720px;
     height: 480px;
+    max-width: 100%;
 }
 
 .toggleFullscreen-btn{
@@ -174,4 +177,79 @@ canvas{
     z-index: 10;
     background: rgba(0, 0, 0, 0.5);
     border-radius: 10px;
+}
+
+#mobileControls{
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 15;
+    pointer-events: none;
+}
+
+.mobileControlsLeft, .mobileControlsRight{
+    display: flex;
+    position: absolute;
+    bottom: 20px;
+    gap: 15px;
+    pointer-events: auto;
+}
+
+.mobileControlsLeft{
+    left: 20px;
+}
+
+.mobileControlsRight{
+    right: 20px;
+}
+
+.mobileButton{
+    width: 60px;
+    height: 60px;
+    border: 2px solid white;
+    border-radius: 50%;
+    background-color: rgb(0, 0, 0, 0.5);
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    touch-action: none;
+    user-select: none;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 900px), only screen and (pointer: coarse) {
+    #mobileControls{
+        display: block;
+    }
+}
+
+@media only screen and (max-height: 500px) and (orientation: landscape) {
+    body{
+        margin: 0;
+        overflow: hidden;
+    }
+
+    h1{
+        display: none;
+    }
+
+    #gameContainer{
+        width: 100%;
+        height: 100vh;
+        max-width: none;
+    }
+
+    canvas{
+        width: 100%;
+        height: 100%;
+    }
+
+    .mobileButton{
+        width: 55px;
+        height: 55px;
+        font-size: 26px;
+    }
 }
