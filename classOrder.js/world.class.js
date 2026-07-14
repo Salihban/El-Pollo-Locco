@@ -83,6 +83,7 @@ export class World {
             let endboss = this.level.enemies.find(enemy => enemy.isEndboss === true);
             if (endboss && bottle.isColliding(endboss) && !bottle.hasSplashed) {
                 bottle.splash();
+                sounds.playSound(sounds.bottleBreak);
                 endboss.energy -= 20;
                 this.statusBarEndboss.setPercentage(endboss.energy);
             if (endboss.energy <= 0) {

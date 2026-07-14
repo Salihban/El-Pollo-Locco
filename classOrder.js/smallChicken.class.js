@@ -1,4 +1,5 @@
 import { MovableObject } from "./movable-object.class.js";
+import { sounds } from "./Sounds.class.js";
 
 export class SmallChicken extends MovableObject{
     y = 390;
@@ -43,8 +44,16 @@ export class SmallChicken extends MovableObject{
 
 die() {
     this.isDead = true;
+    this.playDeadSound();
     this.deadTime = new Date().getTime();
     this.loadImage('img/3_enemies_chicken/chicken_small/2_dead/dead.png');
     this.speed = 0;
+}
+
+playDeadSound() {
+    if (!this.deadSoundPlayed) {
+        sounds.playSound(sounds.chickenDead2);
+        this.deadSoundPlayed = true;
+    }
 }
 }
