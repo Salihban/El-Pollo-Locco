@@ -10,6 +10,7 @@ export class Character extends MovableObject {
     bottles = 0;
     gameOver = false;
     deadSoundPlayed = false;
+    snoringPlayed = false;
 
     offset = {
         top: 90,
@@ -118,20 +119,31 @@ export class Character extends MovableObject {
 
         setInterval(() => {
             if (this.isDead() && !this.gameOver) {
+                sounds.stopSound(sounds.characterSnoring);
+                this.snoringPlayed = false;
                 this.gameOver = true;
                 this.playAnimation(this.IMAGES_Dead);
                 setTimeout(() => {
                     this.world.gameOver = true;
                 }, 1500);
             } else if (this.isHurt()) {
+                sounds.stopSound(sounds.characterSnoring);
+                this.snoringPlayed = false;
                 this.playAnimation(this.IMAGES_HURT);
             } else if (this.isAboveGround()) {
+                sounds.stopSound(sounds.characterSnoring);
+                this.snoringPlayed = false;
                 this.playAnimation(this.IMAGES_JUMPING);
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                // Walk animation
+                sounds.stopSound(sounds.characterSnoring);
+                this.snoringPlayed = false;
                 this.playAnimation(this.IMAGES_WALKING);
             } else {
                 this.playAnimation(this.IMAGES_IDLE);
+                if (!this.snoringPlayed) {
+                    sounds.playSound(sounds.characterSnoring);
+                    this.snoringPlayed = true;
+                }
             }
         }, 80);
     }

@@ -3,9 +3,11 @@ export class Sounds {
     characterJump = new Audio('sounds/sounds/character/characterJump.wav');
     characterDamage = new Audio('sounds/sounds/character/characterDamage.mp3');
     characterDEAD = new Audio('sounds/sounds/character/characterDead.wav');
+    characterSnoring = new Audio('sounds/sounds/character/characterSnoring.mp3');
 
     chickenDead = new Audio('sounds/sounds/chicken/chickenDead.mp3');
     chickenDead2 = new Audio('sounds/sounds/chicken/chickenDead2.mp3');
+    endBossCall = new Audio('sounds/sounds/endboss/endbossApproach.wav');
 
     coinCollect = new Audio('sounds/sounds/collectibles/collectSound.wav');
     bottleCollect = new Audio('sounds/sounds/collectibles/bottleCollectSound.wav');
@@ -23,8 +25,10 @@ export class Sounds {
         this.characterJump.volume = 0.35;
         this.characterDamage.volume = 0.4;
         this.characterDEAD.volume = 0.4;
+        this.characterSnoring.volume = 0.4;
         this.chickenDead.volume = 0.4;
         this.chickenDead2.volume = 0.4;
+        this.endBossCall.volume = 0.4;
         this.coinCollect.volume = 0.35;
         this.bottleCollect.volume = 0.35;
         this.bottleBreak.volume = 0.4;

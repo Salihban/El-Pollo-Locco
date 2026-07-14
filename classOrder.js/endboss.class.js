@@ -1,4 +1,5 @@
 import { MovableObject } from "./movable-object.class.js";
+import { sounds } from "./Sounds.class.js";
 
 export class Endboss extends MovableObject {
     height = 400;
@@ -11,6 +12,7 @@ export class Endboss extends MovableObject {
     showFrame = true;
     deadTime = 0;
     deadanimationPlayed = false;
+    approachSoundPlayed = false;
 
     offset = {
         top: 0,
@@ -55,6 +57,10 @@ export class Endboss extends MovableObject {
                 this.playAnimation(this.IMAGES_DEAD);
             } else { 
                 this.playAnimation(this.IMAGES_WALKING);
+                if (!this.approachSoundPlayed) {
+                    sounds.playSound(sounds.endBossCall);
+                    this.approachSoundPlayed =true;
+                }
             }
         }, 3000);  
     }
