@@ -4,6 +4,7 @@ import { MovableObject } from "./classOrder.js/movable-object.class.js";
 import { World } from "./classOrder.js/world.class.js";
 import { Keyboard } from "./classOrder.js/keyboard.class.js";
 import { StatusBar } from "./classOrder.js/status-bar.class.js";
+import { sounds } from "./classOrder.js/Sounds.class.js";
 
 let canvas;
 let world;
@@ -26,6 +27,7 @@ async function startNewGame() {
 }
 
 document.getElementById("startGame").addEventListener("click", async () => {
+    sounds.playSound(sounds.gameStart);
     document.getElementById('startScreen').style.display = 'none';
     document.getElementById('gameContainer').style.display = 'block';
 

@@ -4,8 +4,13 @@ export class Sounds {
     characterDamage = new Audio('sounds/sounds/character/characterDamage.mp3');
     characterDEAD = new Audio('sounds/sounds/character/characterDead.wav');
 
+    chickenDead = new Audio('sounds/sounds/chicken/chickenDead.mp3');
+    chickenDead2 = new Audio('sounds/sounds/chicken/chickenDead2.mp3');
+
     coinCollect = new Audio('sounds/sounds/collectibles/collectSound.wav');
     bottleCollect = new Audio('sounds/sounds/collectibles/bottleCollectSound.wav');
+    bottleBreak = new Audio('sounds/sounds/throwable/bottleBreak.mp3');
+    gameStart = new Audio('sounds/sounds/game/gameStart.mp3');
 
     constructor() {
         this.setVolums();
@@ -18,8 +23,12 @@ export class Sounds {
         this.characterJump.volume = 0.35;
         this.characterDamage.volume = 0.4;
         this.characterDEAD.volume = 0.4;
+        this.chickenDead.volume = 0.4;
+        this.chickenDead2.volume = 0.4;
         this.coinCollect.volume = 0.35;
         this.bottleCollect.volume = 0.35;
+        this.bottleBreak.volume = 0.4;
+        this.gameStart.volume = 0.4;
     }
 
     playSound(sound) {
