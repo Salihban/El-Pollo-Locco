@@ -96,7 +96,7 @@ export class World {
             if(this.character.isColliding(enemy)){
             if (this.character.speedY < 0 && enemy.die && !enemy.isEndboss) {
                 enemy.die();
-                this.character.speedY =15;
+                this.character.speedY = 15;
             } else {
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy);}}
