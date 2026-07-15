@@ -17,6 +17,7 @@ function init() {
     canvas = document.getElementById('canvas');
 }
 init();
+bindMobilControls();
 
 async function startNewGame() {
     const levelModul = await import("./levels/level1.js");
@@ -135,3 +136,42 @@ window.addEventListener('keyup', (e) => {
         keyboard.C = false;
     }
 });
+
+function bindMobilControls() {
+    const mobileLeft = document.getElementById('mobileLeft');
+    const mobileRight = document.getElementById('mobileRight');
+    const mobileJump = document.getElementById('mobileJump');
+    const mobileThrow = document.getElementById('mobileThrow');
+
+    mobileLeft.addEventListener('pointerdown', () => {
+        keyboard.LEFT = true;
+    });
+
+    mobileLeft.addEventListener('pointerup', () => {
+        keyboard.LEFT = false;
+    });
+
+    mobileRight.addEventListener('pointerdown', () => {
+        keyboard.RIGHT = true;
+    });
+
+    mobileRight.addEventListener('pointerup', () => {
+        keyboard.RIGHT = false;
+    });
+
+    mobileJump.addEventListener('pointerdown', () => {
+        keyboard.SPACE = true;
+    });
+
+    mobileRight.addEventListener('pointerup', () => {
+        keyboard.SPACE = false;
+    });
+
+    mobileThrow.addEventListener('pointerdown', () => {
+        keyboard.C = true;
+    });
+
+    mobileRight.addEventListener('pointerup', () => {
+        keyboard.C = false;
+    });
+}
