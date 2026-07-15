@@ -18,7 +18,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: end;
-    
+    gap: 24px;
     position: absolute;
     top: 158px;
     width: 720px;
@@ -35,10 +35,12 @@ body {
 #startScreen button{
     z-index: 2;
     width: 120px;
-    margin-bottom: 10px;
-    padding: 12px 32px;
+    margin-bottom: 5px;
+    padding: 12px 24px;
     font-size: 24px;
-    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    background: #7a2d12;
+    color: #f4c36a;
     cursor: pointer;
 }
 
@@ -211,8 +213,8 @@ canvas{
     height: 40px;
     border: 2px solid white;
     border-radius: 50%;
-    background-color: rgb(0, 0, 0, 0.5);
-    color: white;
+    background-color: #f4c36a;
+    color: #7a2d12;
     font-size: 28px;
     font-weight: bold;
     touch-action: none;
