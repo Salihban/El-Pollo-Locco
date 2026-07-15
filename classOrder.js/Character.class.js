@@ -2,16 +2,41 @@ import { MovableObject } from "./movable-object.class.js";
 import { StatusBar } from "./status-bar.class.js";
 import { sounds } from "./Sounds.class.js";
 
+/**
+ * Represents the main player character (Pepe).
+ * Handles movement, jumping, animations, sounds and keyboard input.
+ *
+ * @extends MovableObject
+ */
 export class Character extends MovableObject {
-    height = 280;
-    y = 160;
-    speed = 10;
-    showFrame = true;
-    bottles = 0;
-    gameOver = false;
-    deadSoundPlayed = false;
-    snoringPlayed = false;
+    /** Character height in pixels. */
+height = 280;
 
+/** Vertical position. */
+y = 160;
+
+/** Movement speed. */
+speed = 10;
+
+/** Controls whether the current animation frame is shown. */
+showFrame = true;
+
+/** Number of collected bottles. */
+bottles = 0;
+
+/** Indicates whether the game is over. */
+gameOver = false;
+
+/** Prevents the death sound from playing multiple times. */
+deadSoundPlayed = false;
+
+/** Prevents the snoring sound from playing multiple times. */
+snoringPlayed = false;
+
+/**
+ * Collision box offset.
+ * @type {{top:number,right:number,bottom:number,left:number}}
+ */
     offset = {
         top: 90,
         right: 20,
@@ -19,6 +44,10 @@ export class Character extends MovableObject {
         left: 20
     };
 
+    /**
+    * Walking animation images.
+    * @type {string[]}
+    */
     IMAGES_WALKING = [
         'img/2_character_pepe/2_walk/W-21.png',
         'img/2_character_pepe/2_walk/W-22.png',
@@ -28,6 +57,10 @@ export class Character extends MovableObject {
         'img/2_character_pepe/2_walk/W-26.png'
         ];
 
+        /**
+ * Jumping animation images.
+ * @type {string[]}
+ */
     IMAGES_JUMPING = [
         'img/2_character_pepe/3_jump/J-31.png',
         'img/2_character_pepe/3_jump/J-32.png',
@@ -40,7 +73,11 @@ export class Character extends MovableObject {
         'img/2_character_pepe/3_jump/J-39.png'
         ];
 
-        IMAGES_Dead = [
+    /**
+    * Death animation images.
+    * @type {string[]}
+    */
+    IMAGES_Dead = [
             'img/2_character_pepe/5_dead/D-51.png',
             'img/2_character_pepe/5_dead/D-52.png',
             'img/2_character_pepe/5_dead/D-53.png',
@@ -48,15 +85,23 @@ export class Character extends MovableObject {
             'img/2_character_pepe/5_dead/D-55.png',
             'img/2_character_pepe/5_dead/D-56.png',
             'img/2_character_pepe/5_dead/D-57.png'
-        ];
+    ];
 
-        IMAGES_HURT = [
+    /**
+    * Hurt animation images.
+    * @type {string[]}
+    */
+    IMAGES_HURT = [
             'img/2_character_pepe/4_hurt/H-41.png',
             'img/2_character_pepe/4_hurt/H-42.png',
             'img/2_character_pepe/4_hurt/H-43.png'
-        ]
+    ]
 
-        IMAGES_IDLE = [
+    /**
+    * Idle animation images.
+    * @type {string[]}
+    */
+    IMAGES_IDLE = [
             'img/2_character_pepe/1_idle/idle/I-1.png',
             'img/2_character_pepe/1_idle/idle/I-2.png',
             'img/2_character_pepe/1_idle/idle/I-3.png',
@@ -77,9 +122,19 @@ export class Character extends MovableObject {
             'img/2_character_pepe/1_idle/long_idle/I-18.png',
             'img/2_character_pepe/1_idle/long_idle/I-19.png',
             'img/2_character_pepe/1_idle/long_idle/I-20.png',
-        ];
+    ];
 
-        world;
+    /**
+    * Reference to the current game world.
+    * @type {World}
+    */
+    world;
+
+
+    /**
+    * Creates the main character.
+    * Loads all images, applies gravity and starts the animation loops.
+    */
     constructor(){
         super();
         this.loadImage('img/2_character_pepe/2_walk/W-21.png');
@@ -91,7 +146,14 @@ export class Character extends MovableObject {
         this.applyGravity();
         this.animate();
     }
+
+
+    /**
+    * Starts all movement and animation intervals.
+    * Handles keyboard input, movement, sounds and character animations.
+    */
     animate() {
+        // Movement and keyboard handling
         setInterval(() => {
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x){
                 this.moveRight();
@@ -117,6 +179,7 @@ export class Character extends MovableObject {
             this.world.camera_x = -this.x + 100;
         }, 1000 / 25);
 
+        // Animation handling
         setInterval(() => {
             if (this.isDead()) {
                 sounds.stopSound(sounds.characterSnoring);
