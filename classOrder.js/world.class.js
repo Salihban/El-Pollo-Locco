@@ -83,11 +83,8 @@ export class World {
             if (endboss && bottle.isColliding(endboss) && !bottle.hasSplashed) {
                 bottle.splash();
                 sounds.playSound(sounds.bottleBreak);
-                endboss.energy -= 20;
+                endboss.getHit();
                 this.statusBarEndboss.setPercentage(endboss.energy);
-            if (endboss.energy <= 0) {
-                endboss.die();
-            }
             }
         });
         this.throwableObjects = this.throwableObjects.filter(bottle => !bottle.removeBottle);
