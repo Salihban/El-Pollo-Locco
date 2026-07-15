@@ -76,10 +76,6 @@ export class DrawableObject {
     drawFrame(ctx) {
         if (this.showFrame) {
             this.getRealFrame();
-
-            ctx.beginPath();
-            ctx.lineWidth = 5;
-            ctx.strokeStyle = 'blue';
             ctx.rect(this.rX, this.rY, this.rW, this.rH);
             ctx.stroke();
         }

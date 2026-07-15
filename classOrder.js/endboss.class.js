@@ -31,9 +31,6 @@ export class Endboss extends MovableObject {
     /** Time when the endboss died. */
     deadTime = 0;
 
-    /** Controls whether the collision frame is visible. */
-    showFrame = true;
-
     /** Indicates whether the death animation has finished. */
     deadanimationPlayed = false;
 

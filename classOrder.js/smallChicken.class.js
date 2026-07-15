@@ -19,9 +19,6 @@ export class SmallChicken extends MovableObject {
     /** Width of the small chicken in pixels. */
     width = 45;
 
-    /** Controls whether the collision frame is displayed. */
-    showFrame = true;
-
     /** Indicates whether the small chicken is dead. */
     isDead = false;
 
