@@ -161,7 +161,7 @@ snoringPlayed = false;
                 this.otherDirection = true;
                 sounds.startRunSound();
             } else {
-                sounds.stopRundSound();
+                sounds.stopRunSound();
             }
             
             if (this.world.keyboard.LEFT && this.x > 0){
