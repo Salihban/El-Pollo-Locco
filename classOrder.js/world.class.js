@@ -65,8 +65,7 @@ export class World {
             this.gameOver = true;}
             this.removeDeadEnemies();
         }, 50);
-        this.intervalls.push(interval);
-    }
+        this.intervalls.push(interval); }
 
     checkThrowObjects() {
         if (this.keyboard.C && this.character.bottles > 0) {
@@ -141,44 +140,66 @@ export class World {
     }
 
     draw() {
-        this.ctx.clearRect(0, 0, canvas.width, canvas.height);
-        this.ctx.translate(this.camera_x, 0);
-        this.addObjectsToMap(this.level.BackgroundObjects);
-        this.addObjectsToMap(this.level.clouds);
-        this.ctx.translate(-this.camera_x, 0);
-        // ------ Space for fixed objects -------
-        this.addToMap(this.statusBar);
-        this.addToMap(this.statusBarEndboss);
-        this.addToMap(this.statusBarCoin);
-        this.addToMap(this.StatusBottleBar);
-        this.ctx.translate(this.camera_x, 0);
-        this.addToMap(this.character);
-        this.addObjectsToMap(this.level.enemies);
-        this.addObjectsToMap(this.level.coins);
-        this.addObjectsToMap(this.level.bottles);
-        this.addObjectsToMap(this.throwableObjects);
-            if (this.gameOver) {
-                document.getElementById('YouLoseScreen').style.display = "block";
-                return;
-            }
-        if (this.gameWon) {
-            document.getElementById('YouWonScreen').style.display = "block";
+        this.clearCanvas();
+        this.drawBackground();
+        this.drawFixedObjects();
+        this.drawGameObjects();
+        if (this.showEndScreen()) {
             return;
         }
         this.ctx.translate(-this.camera_x, 0);
-        // draw() is called repeatedly
         let self = this;
         this.animationFrameId = requestAnimationFrame(function() {
             self.draw();
         });
         }
 
-        addObjectsToMap(objects){
+    clearCanvas() {
+        this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    drawBackground() {
+        this.ctx.translate(this.camera_x, 0);
+        this.addObjectsToMap(this.level.BackgroundObjects);
+        this.addObjectsToMap(this.level.clouds);
+        this.ctx.translate(-this.camera_x, 0);
+    }
+
+    drawFixedObjects() {
+        this.addToMap(this.statusBar);
+        this.addToMap(this.statusBarEndboss);
+        this.addToMap(this.statusBarCoin);
+        this.addToMap(this.StatusBottleBar);
+    }
+
+    drawGameObjects() {
+        this.ctx.translate(this.camera_x, 0);
+        this.addToMap(this.character);
+        this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.level.coins);
+        this.addObjectsToMap(this.level.bottles);
+        this.addObjectsToMap(this.throwableObjects);
+    }
+
+    showEndScreen() {
+        if (this.gameOver) {
+                document.getElementById('YouLoseScreen').style.display = "block";
+                return true;
+            }
+        if (this.gameWon) {
+            document.getElementById('YouWonScreen').style.display = "block";
+            return true;
+        }
+        return false;
+    }
+
+    addObjectsToMap(objects){
             objects.forEach(o => {
                 this.addToMap(o);
             })
         }
-        addToMap(mo) {
+
+    addToMap(mo) {
         if (mo.otherDirection) {
             this.flipImage(mo);
         }
@@ -190,19 +211,19 @@ export class World {
         }
         }
 
-        flipImage(mo) {
+    flipImage(mo) {
             this.ctx.save();
             this.ctx.translate(mo.width, 0);
             this.ctx.scale(-1, 1);
             mo.x = mo.x * -1;
         }
 
-        flipImageBack(mo) {
+    flipImageBack(mo) {
             mo.x = mo.x * -1;
             this.ctx.restore();
         }
 
-        stopGame() {
+    stopGame() {
             this.intervalls.forEach((id) => {
                 clearInterval(id);
             });
