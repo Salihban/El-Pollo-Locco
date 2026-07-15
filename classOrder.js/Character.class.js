@@ -18,9 +18,6 @@ y = 160;
 /** Movement speed. */
 speed = 10;
 
-/** Controls whether the current animation frame is shown. */
-showFrame = true;
-
 /** Number of collected bottles. */
 bottles = 0;
 
