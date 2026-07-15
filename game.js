@@ -1,8 +1,6 @@
 import { Character } from "./classOrder.js/Character.class.js";
 import { Chicken } from "./classOrder.js/chicken.class.js";
 import { MovableObject } from "./classOrder.js/movable-object.class.js";
-import { World } from "./classOrder.js/world.class.js";
-import { Keyboard } from "./classOrder.js/keyboard.class.js";
 import { StatusBar } from "./classOrder.js/status-bar.class.js";
 import { sounds } from "./classOrder.js/Sounds.class.js";
 
@@ -13,12 +11,22 @@ const controlsDialog = document.getElementById('controlsDialog');
 const openControlsButton = document.getElementById('openControls');
 const closeControlsButton = document.getElementById('closeControls');
 
+/**
+ * Initializes the game canvas.
+ *
+ * @returns {void}
+ */
 function init() {
     canvas = document.getElementById('canvas');
 }
 init();
 bindMobilControls();
 
+/**
+ * Creates and starts a new game.
+ *
+ * @returns {Promise<void>}
+ */
 async function startNewGame() {
     const levelModul = await import("./levels/level1.js");
     const freshLevel = levelModul.createLevel1();
@@ -84,6 +92,11 @@ window.addEventListener('load', async () => {
     
 });
 
+/**
+ * Toggles fullscreen mode for the game canvas.
+ *
+ * @returns {void}
+ */
 window.toggleFullscreen = function() {
     let canvas = document.getElementById('canvas');
 
@@ -137,6 +150,11 @@ window.addEventListener('keyup', (e) => {
     }
 });
 
+/**
+ * Binds all mobile control buttons.
+ *
+ * @returns {void}
+ */
 function bindMobilControls() {
     const mobileLeft = document.getElementById('mobileLeft');
     const mobileRight = document.getElementById('mobileRight');
@@ -163,15 +181,15 @@ function bindMobilControls() {
         keyboard.SPACE = true;
     });
 
-    mobileRight.addEventListener('pointerup', () => {
-        keyboard.SPACE = false;
+    mobileJump.addEventListener('pointerup', () => {
+    keyboard.SPACE = false;
     });
 
     mobileThrow.addEventListener('pointerdown', () => {
         keyboard.C = true;
     });
 
-    mobileRight.addEventListener('pointerup', () => {
-        keyboard.C = false;
+    mobileThrow.addEventListener('pointerup', () => {
+    keyboard.C = false;
     });
 }
