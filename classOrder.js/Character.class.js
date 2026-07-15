@@ -118,14 +118,17 @@ export class Character extends MovableObject {
         }, 1000 / 25);
 
         setInterval(() => {
-            if (this.isDead() && !this.gameOver) {
+            if (this.isDead()) {
                 sounds.stopSound(sounds.characterSnoring);
                 this.snoringPlayed = false;
-                this.gameOver = true;
-                this.playAnimation(this.IMAGES_Dead);
-                setTimeout(() => {
-                    this.world.gameOver = true;
-                }, 1500);
+                if (!this.gameOver) {
+                    this.gameOver = true;
+                    this.playAnimation(this.IMAGES_Dead);
+                    setTimeout(() => {
+                        this.world.gameOver = true;
+                    }, 1500);
+                }
+                return;
             } else if (this.isHurt()) {
                 sounds.stopSound(sounds.characterSnoring);
                 this.snoringPlayed = false;
