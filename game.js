@@ -9,6 +9,9 @@ import { sounds } from "./classOrder.js/Sounds.class.js";
 let canvas;
 let world;
 let keyboard = new Keyboard();
+const imprintDialog = document.getElementById('imprintDialog');
+const openImprintButton = document.getElementById('openImprint');
+const closeImprintButton = document.getElementById('closeImprint');
 const controlsDialog = document.getElementById('controlsDialog');
 const openControlsButton = document.getElementById('openControls');
 const closeControlsButton = document.getElementById('closeControls');
@@ -195,3 +198,30 @@ function bindMobilControls() {
     keyboard.C = false;
     });
 }
+
+/**
+ * Opens the imprint dialog.
+ *
+ * @returns {void}
+ */
+function openImprint() {
+    imprintDialog.style.display = 'flex';
+}
+
+/**
+ * Closes the imprint dialog.
+ *
+ * @returns {void}
+ */
+function closeImprint() {
+    imprintDialog.style.display = 'none';
+}
+
+openImprintButton.addEventListener('click', openImprint);
+closeImprintButton.addEventListener('click', closeImprint);
+
+imprintDialog.addEventListener('click', (event) => {
+    if (event.target === imprintDialog) {
+        closeImprint();
+    }
+});
