@@ -183,16 +183,6 @@ canvas{
     max-width: 100%;
 }
 
-.toggleFullscreen-btn{
-    position: absolute;
-    right: 30px;
-    font-size: 24px;
-    cursor: pointer;
-    z-index: 10;
-    background: rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
-}
-
 #mobileControls{
     display: none;
     position: absolute;

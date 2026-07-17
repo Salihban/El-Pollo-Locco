@@ -331,16 +331,28 @@ export class World {
     }
 
     /**
-     * Checks whether the character can defeat an enemy by jumping on it.
+    * Checks whether the character can defeat an enemy by jumping on it.
      *
-     * @param {MovableObject} enemy - Enemy being checked.
-     * @returns {boolean} True if the enemy can be defeated.
+     * The character must be falling, hit the enemy from above,
+     * and the enemy must not be the endboss.
+     *
+     * @param {MovableObject} enemy - The enemy being checked.
+     * @returns {boolean} True if the enemy can be defeated by jumping on it.
      */
     canJumpOnEnemy(enemy) {
-        return this.character.speedY < 0 &&
-            typeof enemy.die === "function" &&
-            !enemy.isEndboss;
-    }
+    const characterBottom = this.character.rY + this.character.rH;
+    const enemyTop = enemy.rY;
+
+    const characterIsFalling = this.character.speedY < 0;
+    const characterIsAboveEnemy = characterBottom <= enemyTop + 35;
+
+    return (
+        characterIsFalling &&
+        characterIsAboveEnemy &&
+        !enemy.isEndboss &&
+        typeof enemy.die === 'function'
+    );
+}
 
     /**
      * Damages the character and updates the health bar.
