@@ -4,7 +4,7 @@ import { Cloud } from "./Cloud.class.js";
 import { BackgroundObject } from "./background-Object.class.js";
 import { StatusBar } from "./status-bar.class.js";
 import { StatusBarEndboss } from "./statusBarEndboss.class.js";
-import { StatusBarCoin } from "./StatusBarCoin.class.js";
+import { StatusBarCoin } from "./statusBarCoin.class.js";
 import { StatusBottleBar } from "./statusBottleBar.class.js";
 import { ThrowableObject } from "./throwable-object.class.js";
 import { sounds } from "./Sounds.class.js";
