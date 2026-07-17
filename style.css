@@ -52,6 +52,10 @@ body {
     cursor: pointer;
 }
 
+#rotateDeviceScreen{
+    display: none;
+}
+
 #openControls{
     display: flex;
     justify-content: center;
@@ -230,13 +234,47 @@ canvas{
     cursor: pointer;
 }
 
-@media only screen and (max-width: 900px), only screen and (pointer: coarse) {
+    #rotateDeviceScreen{
+        display: none;
+    }
+
     #mobileControls{
-        display: block;
+        display: none;
+    }
+
+@media only screen and (max-width: 900px) and (orientation: portrait) {
+    #rotateDeviceScreen{
+        display: flex;
+    }
+
+    #gameContainer, h1{
+        display: none;
+    }
+
+    #rotateDeviceScreen{
+        position: fixed;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        background-color: rgb(0, 0, 0, 0.9);
+        color: orangered;
+        text-align: center;
+        font-size: 28px;
     }
 }
 
-@media only screen and (max-height: 500px) and (orientation: landscape) {
+@media only screen and (max-width: 900px) and (orientation: landscape) {
+    #rotateDeviceScreen{
+        display: none;
+    }
+    
+    #mobileControls{
+        display: block;
+    }
+
     body{
         margin: 0;
         overflow: hidden;
