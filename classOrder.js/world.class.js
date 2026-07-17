@@ -7,6 +7,7 @@ import { StatusBarEndboss } from "./statusBarEndboss.class.js";
 import { StatusBarCoin } from "./statusBarCoin.class.js";
 import { StatusBottleBar } from "./statusBottleBar.class.js";
 import { ThrowableObject } from "./throwable-object.class.js";
+import { Bottle } from "./bottle.class.js";
 import { sounds } from "./Sounds.class.js";
 
 /**
@@ -115,8 +116,8 @@ export class World {
         this.canvas = canvas;
         this.keyboard = keyboard;
         this.level = level;
-        this.loadEndScreenImages();
         this.setWorld();
+        this.loadEndScreenImages();
         this.run();
         this.draw();
     }
@@ -135,13 +136,16 @@ export class World {
     }
 
     /**
-     * Gives the character access to this world.
-     *
-     * @returns {void}
-     */
+    * Connects the character and all enemies to the game world.
+    *
+    * @returns {void}
+    */
     setWorld() {
-        this.character.world = this;
-    }
+    this.character.world = this;
+    this.level.enemies.forEach(enemy => {
+        enemy.world = this;
+    });
+}
 
     /**
      * Starts the main game logic interval.
@@ -167,6 +171,7 @@ export class World {
         this.checkCoinsCollisions();
         this.checkBottleCollisions();
         this.checkThrowObjects();
+        this.checkBottleRespawn();
         this.updateGameState();
         this.removeDeadEnemies();
     }
@@ -180,11 +185,9 @@ export class World {
         const endboss = this.level.enemies.find(
             enemy => enemy.isEndboss
         );
-
         if (endboss?.isDead && endboss.deadanimationPlayed) {
             this.gameWon = true;
         }
-
         if (this.character.isDead()) {
             this.gameOver = true;
         }
@@ -199,22 +202,17 @@ export class World {
     if (
         this.keyboard.C &&
         this.character.bottles > 0 &&
-        this.canThrowBottle
-    ) {
+        this.canThrowBottle) {
         this.canThrowBottle = false;
-
     let bottle = new ThrowableObject(
         this.character.x + 100,
         this.character.y + 100,
         this.character.otherDirection
     );
-
     this.throwableObjects.push(bottle);
-
     this.character.bottles--;
     this.StatusBottleBar.setPercentage(this.character.bottles * 20);
     }
-
     if (!this.keyboard.C) {
         this.canThrowBottle = true;
     }
@@ -347,6 +345,49 @@ export class World {
         } else {
             this.damageCharacter();
         }
+    }
+
+    /**
+    * Spawns a new collectible bottle in front of the character.
+    *
+    * @returns {void}
+    */
+    spawnBottle() {
+    const x = Math.min(
+        this.character.x + 500,
+        this.level.level_end_x - 100
+    );
+    const bottle = new Bottle(x, 350);
+    this.level.bottles.push(bottle);
+    }
+
+    /**
+    * Spawns a new bottle when the character has no bottles left.
+    *
+    * @returns {void}
+    */
+    checkBottleRespawn() {
+    if (this.character.bottles === 0 && this.level.bottles.length === 0) {
+        this.level.bottles.push(new Bottle(2400, 360));
+    }
+    }
+
+    /**
+    * Removes broken bottles and spawns a replacement
+    * when a thrown bottle disappears.
+    *
+    * @returns {void}
+    */
+    removeBrokenBottles() {
+    const bottleWasRemoved = this.throwableObjects.some(
+        bottle => bottle.removeBottle
+    );
+    this.throwableObjects = this.throwableObjects.filter(
+        bottle => !bottle.removeBottle
+    );
+    if (bottleWasRemoved) {
+        this.spawnBottle();
+    }
     }
 
     /**

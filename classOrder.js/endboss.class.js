@@ -61,14 +61,10 @@ export class Endboss extends MovableObject {
      * @type {string[]}
      */
     IMAGES_WALKING = [
-        'img/4_enemie_boss_chicken/2_alert/G5.png',
-        'img/4_enemie_boss_chicken/2_alert/G6.png',
-        'img/4_enemie_boss_chicken/2_alert/G7.png',
-        'img/4_enemie_boss_chicken/2_alert/G8.png',
-        'img/4_enemie_boss_chicken/2_alert/G9.png',
-        'img/4_enemie_boss_chicken/2_alert/G10.png',
-        'img/4_enemie_boss_chicken/2_alert/G11.png',
-        'img/4_enemie_boss_chicken/2_alert/G12.png'
+        'img/4_enemie_boss_chicken/1_walk/G1.png',
+        'img/4_enemie_boss_chicken/1_walk/G2.png',
+        'img/4_enemie_boss_chicken/1_walk/G3.png',
+        'img/4_enemie_boss_chicken/1_walk/G4.png'
     ];
 
     /**
@@ -132,6 +128,7 @@ export class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_DEAD);
 
         this.x = 2200;
+        this.speed = 1;
         this.animate();
     }
 
@@ -142,19 +139,25 @@ export class Endboss extends MovableObject {
      * @returns {void}
      */
     animate() {
-        setInterval(() => {
-            if (this.isDead) {
-                this.playAnimation(this.IMAGES_DEAD);
-            } else if (this.isHurt) {
-                this.playAnimation(this.IMAGES_HURT);
-            } else if (this.attacking) {
-                this.playAnimation(this.IMAGES_ATTACK);
-            } else {
-                this.playAnimation(this.IMAGES_WALKING);
-                this.playApproachSound();
-            }
-        }, 150);
-    }
+    setInterval(() => {
+        if (!this.world || this.isDead) return;
+        if (this.world.character.x > 1700 && !this.isDead) {
+            this.moveLeft();
+        }
+    }, 1000 / 25);
+    setInterval(() => {
+        if (this.isDead) {
+            this.playAnimation(this.IMAGES_DEAD);
+        } else if (this.isHurt) {
+            this.playAnimation(this.IMAGES_HURT);
+        } else if (this.attacking) {
+            this.playAnimation(this.IMAGES_ATTACK);
+        } else {
+            this.playAnimation(this.IMAGES_WALKING);
+            this.playApproachSound();
+        }
+    }, 150);
+}
 
     /**
      * Plays the approach sound once.

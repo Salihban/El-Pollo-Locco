@@ -215,56 +215,58 @@ lastActionTime = new Date().getTime();
     }
 
 
-    /**
-    * Starts all movement and animation intervals.
-    * Handles keyboard input, movement, sounds and character animations.
-    */
     animate() {
-        // Movement and keyboard handling
-        setInterval(() => {
-            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x){
-                this.registerAction();
-                this.moveRight();
-                this.otherDirection = false;
-                sounds.startRunSound();
-            } else if (this.world.keyboard.LEFT && this.x > 0) {
-                this.registerAction();
-                this.moveLeft();
-                this.otherDirection = true;
-                sounds.startRunSound();
-            } else {
-                sounds.stopRunSound();
-            }
-            
-            if (this.world.keyboard.LEFT && this.x > 0){
-                this.moveLeft();
-                this.otherDirection = true;
-            }
+    this.startMovement();
+    this.startAnimations();
+    }
 
-            if (this.world.keyboard.SPACE && !this.isAboveGround()) {
-                this.registerAction();
-                this.jump();
-            }
+    /**
+    * Starts the movement loop.
+    *
+    * @returns {void}
+    */
+    startMovement() {
+    setInterval(() => {
+        if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+            this.registerAction();
+            this.moveRight();
+            this.otherDirection = false;
+            sounds.startRunSound();
+        } else if (this.world.keyboard.LEFT && this.x > 0) {
+            this.registerAction();
+            this.moveLeft();
+            this.otherDirection = true;
+            sounds.startRunSound();
+        } else {
+            sounds.stopRunSound();
+        }
+        if (this.world.keyboard.SPACE && !this.isAboveGround()) {
+            this.registerAction();
+            this.jump();}
+        this.world.camera_x = -this.x + 100;
+        }, 1000 / 25); }
 
-            this.world.camera_x = -this.x + 100;
-        }, 1000 / 25);
-
-        // Animation handling
-        setInterval(() => {
+    /**
+    * Starts the animation loop.
+    *
+    * @returns {void}
+    */
+    startAnimations() {
+    setInterval(() => {
         if (this.isDead()) {
-        this.handleDeadAnimation();
-            } else if (this.isHurt()) {
-        this.handleHurtAnimation();
-            } else if (this.isAboveGround()) {
-        this.handleJumpAnimation();
-            } else if (this.isWalking()) {
-        this.handleWalkingAnimation();
-            } else if (this.isLongIdle()) {
-        this.handleLongIdleAnimation();
-            } else {
-        this.handleIdleAnimation();
-            }
-        }, 80);
+            this.handleDeadAnimation();
+        } else if (this.isHurt()) {
+            this.handleHurtAnimation();
+        } else if (this.isAboveGround()) {
+            this.handleJumpAnimation();
+        } else if (this.isWalking()) {
+            this.handleWalkingAnimation();
+        } else if (this.isLongIdle()) {
+            this.handleLongIdleAnimation();
+        } else {
+            this.handleIdleAnimation();
+        }
+    }, 80);
     }
 
     /**
