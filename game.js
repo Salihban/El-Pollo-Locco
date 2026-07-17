@@ -15,6 +15,7 @@ const closeImprintButton = document.getElementById('closeImprint');
 const controlsDialog = document.getElementById('controlsDialog');
 const openControlsButton = document.getElementById('openControls');
 const closeControlsButton = document.getElementById('closeControls');
+const soundButton = document.getElementById('soundButton');
 
 /**
  * Initializes the game canvas.
@@ -183,6 +184,23 @@ function bindMobilControls() {
     keyboard.C = false;
     });
 }
+
+    /**
+    * Updates the sound button according to the current mute state.
+    *
+    * @returns {void}
+    */
+    function updateSoundButton() {
+    soundButton.textContent = sounds.isMuted ? '🔇' : '🔊';
+    soundButton.title = sounds.isMuted
+        ? 'Turn sound on'
+        : 'Turn sound off';
+    }
+
+    soundButton.addEventListener('click', () => {
+    sounds.toggleMute();
+    updateSoundButton();
+    });
 
 /**
  * Opens the imprint dialog.

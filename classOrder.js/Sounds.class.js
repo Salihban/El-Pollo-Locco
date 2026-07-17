@@ -46,8 +46,10 @@ export class Sounds {
      */
     constructor() {
         this.setVolumes();
-
         this.characterRun.loop = true;
+
+        this.isMuted = localStorage.getItem('soundMuted') === 'true';
+        this.applyMuteState();
     }
 
     /**
@@ -117,6 +119,58 @@ export class Sounds {
         if (!this.characterRun.paused) {
             this.stopSound(this.characterRun);
         }
+    }
+
+    /**
+    * Returns all audio elements used by the game.
+    *
+    * @returns {HTMLAudioElement[]} All game sounds.
+    */
+    getAllSounds() {
+    return [
+        this.characterRun,
+        this.characterJump,
+        this.characterDamage,
+        this.characterDEAD,
+        this.characterSnoring,
+        this.chickenDead,
+        this.chickenDead2,
+        this.endBossCall,
+        this.coinCollect,
+        this.bottleCollect,
+        this.bottleBreak,
+        this.gameStart
+    ];
+    }
+
+    /**
+    * Applies the current mute state to all game sounds.
+    *
+    * @returns {void}
+    */
+    applyMuteState() {
+    this.getAllSounds().forEach((sound) => {
+        sound.muted = this.isMuted;
+    });
+    }
+
+    /**
+    * Toggles all game sounds and saves the state
+    * in local storage.
+    *
+    * @returns {boolean} True if all sounds are muted.
+    */
+    toggleMute() {
+    this.isMuted = !this.isMuted;
+
+    localStorage.setItem(
+        'soundMuted',
+        this.isMuted.toString()
+    );
+
+    this.applyMuteState();
+
+    return this.isMuted;
     }
 }
 
