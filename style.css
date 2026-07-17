@@ -1,3 +1,10 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -5,7 +12,8 @@ body {
     background-image: url('img/creativecanvasshop-cinque-terre-10152364.svg');
     background-repeat: no-repeat;
     background-position: center;
-    height: 90dvh;
+    background-size: cover;
+    min-height: 100dvh;
     font-family: 'zabras', Arial, Helvetica, sans-serif;
 }
 
