@@ -103,19 +103,24 @@ export class MovableObject extends DrawableObject {
     }
 
     /**
-     * Reduces the energy of the object and stores the hit time.
-     *
-     * @returns {void}
-     */
+    * Reduces the object's energy if it is not currently protected
+    * by the damage cooldown.
+    *
+    * @returns {void}
+    */
     hit() {
-        this.energy -= 5;
-        sounds.playSound(sounds.characterDamage);
+    if (this.isHurt()) {
+        return;
+    }
 
-        if (this.energy < 0) {
-            this.energy = 0;
-        } else {
-            this.lastHit = new Date().getTime();
-        }
+    this.energy -= 5;
+    sounds.playSound(sounds.characterDamage);
+
+    if (this.energy < 0) {
+        this.energy = 0;
+    }
+
+    this.lastHit = new Date().getTime();
     }
 
     /**
@@ -127,7 +132,7 @@ export class MovableObject extends DrawableObject {
         let timePassed = new Date().getTime() - this.lastHit;
         timePassed = timePassed / 1000;
 
-        return timePassed < 1;
+        return timePassed < 0.3;
     }
 
     /**

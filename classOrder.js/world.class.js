@@ -26,6 +26,9 @@ export class World {
     /** Current game level. */
     level;
 
+    throwableObjects = [];
+    canThrowBottle = true;
+
     /**
      * Canvas element used to display the game.
      *
@@ -98,6 +101,7 @@ export class World {
      * @type {number|null}
      */
     animationFrameId = null;
+
 
     /**
      * Creates a new game world.
@@ -187,19 +191,34 @@ export class World {
     }
 
     /**
-     * Checks whether the player wants to throw a bottle.
-     *
-     * @returns {void}
-     */
+    * Checks whether the character can throw a bottle.
+    *
+    * @returns {void}
+    */
     checkThrowObjects() {
-        if (!this.keyboard.C || this.character.bottles <= 0) {
-            return;
-        }
+    if (
+        this.keyboard.C &&
+        this.character.bottles > 0 &&
+        this.canThrowBottle
+    ) {
+        this.canThrowBottle = false;
 
-        const bottle = this.createThrowableBottle();
-        this.throwableObjects.push(bottle);
-        this.reduceBottleInventory();
+    let bottle = new ThrowableObject(
+        this.character.x + 100,
+        this.character.y + 100,
+        this.character.otherDirection
+    );
+
+    this.throwableObjects.push(bottle);
+
+    this.character.bottles--;
+    this.StatusBottleBar.setPercentage(this.character.bottles * 20);
     }
+
+    if (!this.keyboard.C) {
+        this.canThrowBottle = true;
+    }
+}
 
     /**
      * Creates a new throwable bottle at the character position.
